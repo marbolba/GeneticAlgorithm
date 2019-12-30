@@ -32,18 +32,6 @@ class Population:
     def setSetting(self, setting: Setting):
         self._setting = setting
 
-    def reportBestIndividual(self):
-        sortedIndividuals = sorted(self.population, key=lambda x: x._adaptation, reverse=True)
-        print('Best individual: genome: {} value {} adaptation: {} '.format(sortedIndividuals[0].genotype.getGenotype(), sortedIndividuals[0].getValue(),
-                                                                            sortedIndividuals[0].getAdaptation()))  # tmp without indiv object
-
-    def reportAllIndividuals(self):
-        print(list(map(lambda indiv: (indiv.genotype.getGenotype(), indiv.getAdaptation()), self.population)))
-
-    def reportPopulationAverage(self):
-        adaptationAvg = np.average(list(map(lambda indiv: indiv.getAdaptation(), self.population)))
-        print('Population average: adaptation: {} '.format(adaptationAvg))  # tmp without indiv object
-
     def rouletteReproduction(self):
         # creating select chance array
         adaptationSum = 0
