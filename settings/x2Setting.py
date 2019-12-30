@@ -13,3 +13,4 @@ class X2Setting(Setting):
 
     def crossoverProbability(self):
         return 0.5
+    

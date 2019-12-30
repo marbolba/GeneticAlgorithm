@@ -10,4 +10,3 @@ class Setting:
 
     def crossoverProbability(self):
         raise NotImplementedError("The method not implemented")
-
