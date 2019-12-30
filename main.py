@@ -13,7 +13,7 @@ def runForX2():
         print("\nGeneration {}".format(_))
         # raports
         ga.population.reportPopulationAverage()
-        ga.population.raportBestIndividual()
+        ga.population.reportBestIndividual()
 
         ga.population.rouletteReproduction()
         ga.population.singlePointCrossover()

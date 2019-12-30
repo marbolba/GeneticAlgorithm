@@ -32,10 +32,12 @@ class Population:
     def setSetting(self, setting: Setting):
         self._setting = setting
 
-    def raportBestIndividual(self):
+    def reportBestIndividual(self):
         sortedIndividuals = sorted(self.population, key=lambda x: x._adaptation, reverse=True)
         print('Best individual: genome: {} value {} adaptation: {} '.format(sortedIndividuals[0].genotype.getGenotype(), sortedIndividuals[0].getValue(),
                                                                             sortedIndividuals[0].getAdaptation()))  # tmp without indiv object
+
+    def reportAllIndividuals(self):
         print(list(map(lambda indiv: (indiv.genotype.getGenotype(), indiv.getAdaptation()), self.population)))
 
     def reportPopulationAverage(self):
@@ -82,7 +84,7 @@ class Population:
             self.population[i + 1].setGenotype(tmpGenotype2.copy())  # ???
             # print('ax:', self._population[i]._genotype.getGenotype(), '&', self._population[i + 1]._genotype.getGenotype(), 'in', cutPoint)
 
-    def mutation(self,probability):
+    def mutation(self, probability):
         for indiv in self.population:
             for geneIdx in range(len(indiv.genotype.genotype)):
                 if np.random.rand() <= probability:
