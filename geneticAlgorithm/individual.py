@@ -1,8 +1,6 @@
 import copy
 
-import numpy as np
-
-from geneticAlgorithm.binaryGenotype import BinaryGenotype
+from geneticAlgorithm.genotype.binaryGenotype import BinaryGenotype
 from problem.abstractProblem import Problem
 from settings.abstractSettings import Setting
 
@@ -33,10 +31,9 @@ class Individual:
 
     def _initGenotype(self):
         g = BinaryGenotype()
-        g.setLength(self._setting.genotypeLenght())
+        g.setGenotypeInfo(self._problem.genotypeInfo())
         g.randomize()
         self.genotype = g
-        print(self.genotype)
 
         self._value = self.genotype.calculateValue()
         self._calculateFenotype()
