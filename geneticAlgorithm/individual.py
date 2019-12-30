@@ -4,12 +4,14 @@ import numpy as np
 
 from geneticAlgorithm.binaryGenotype import BinaryGenotype
 from problem.abstractProblem import Problem
+from settings.abstractSettings import Setting
 
 
 class Individual:
     def __init__(self):
-        self._genotype = None
+        self.genotype = None
         self._problem = None
+        self._setting = None
 
         self._value = None
         self._fenotype = None
@@ -17,23 +19,26 @@ class Individual:
 
     def setProblem(self, problem: Problem):
         self._problem = problem
-
         self._initGenotype()
 
-    def setGenotype(self, genotype:[]):
-        self._genotype.genotype = copy.deepcopy(genotype)
+    def setSetting(self, setting: Setting):
+        self._setting = setting
 
-        self._value = self._genotype.calculateValue()
+    def setGenotype(self, genotype:[]):
+        self.genotype.genotype = copy.deepcopy(genotype)
+
+        self._value = self.genotype.calculateValue()
         self._calculateFenotype()
         self._calculateAdaptation()
 
     def _initGenotype(self):
         g = BinaryGenotype()
-        g.setLength(self._problem.genotypeLenght())
+        g.setLength(self._setting.genotypeLenght())
         g.randomize()
-        self._genotype = g
+        self.genotype = g
+        print(self.genotype)
 
-        self._value = self._genotype.calculateValue()
+        self._value = self.genotype.calculateValue()
         self._calculateFenotype()
         self._calculateAdaptation()
 

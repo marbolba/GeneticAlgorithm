@@ -1,32 +1,31 @@
+import sys
+
 from geneticAlgorithm.population import Population
 from problem.abstractProblem import Problem
-from problem.x2 import X2
+from settings.abstractSettings import Setting
 
 
 class Ga:
     def __init__(self):
-        self._population = None
+        self.population = None
+        self._setting = None
         self._problem = None
 
-    def initPopulation(self, size):
-        self._population = Population(size)
+    def initPopulation(self):
+        # Guardian block
+        if self._setting is None or self._problem is None:
+            print('ERR: setting or problem no set, cannot initialize population')
+            sys.exit(0)
+
+        self.population = Population()
+        self.population.setProblem(self._problem)
+        self.population.setSetting(self._setting)
+        self.population.generateRandomPopulation()
 
     def setProblem(self, problem: Problem):
-        self._population.setProblem(problem)
+        self._problem = problem
 
+    def setSetting(self, setting: Setting):
+        self._setting = setting
 
-if __name__ == "__main__":
-    ga = Ga()
-    ga.initPopulation(10)
-    ga.setProblem(X2())
-
-    for _ in range(15):
-        print("\nGeneration {}".format(_))
-        # raports
-        ga._population.reportPopulationAverage()
-        ga._population.raportBestIndividual()
-
-        ga._population.rouletteReproduction()
-        ga._population.singlePointCrossover()
-        ga._population.mutation(0.01)
 
