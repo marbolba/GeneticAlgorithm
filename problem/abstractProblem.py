@@ -7,3 +7,6 @@ class Problem:
 
     def adaptationFunction(self, value):
         raise NotImplementedError("The method not implemented")
+
+    def genotypeInfo(self):
+        raise NotImplementedError("The method not implemented")
