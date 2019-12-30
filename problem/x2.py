@@ -1,16 +1,13 @@
 import numpy as np
 
-from problem.abstractProblem import Problem
+from problem.abstractProblem import Problem, GenotypeInfo
 
 
-class GenotypeInfo:
-    parameters = 2
-    parameteresWordLength = [6, 6]
-    parameteresDomain = [(0, 20), (0, 40)]
-
-    def validateParameters(self):
-        print(self.parameteres() == len(self.parameteresWordLength) == len(self.parameteresDomain))
-        return self.parameteres() == len(self.parameteresWordLength) == len(self.parameteresDomain)
+class X2GenotypeInfo(GenotypeInfo):
+    def __init__(self):
+        self.parameters = 1
+        self.parametersWordLength = [6]
+        self.parametersDomain = [(0, 20)]  # eg.[(0, 20), (0, 40)]
 
 
 class X2(Problem):
@@ -21,4 +18,4 @@ class X2(Problem):
         return np.power(value, 2)
 
     def genotypeInfo(self):
-        return GenotypeInfo()
+        return X2GenotypeInfo()
