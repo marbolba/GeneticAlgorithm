@@ -32,12 +32,26 @@ class BinaryGenotype(Genotype):
         # binary genotype
         for i in range(self.length):
             self.genotype.append(np.random.randint(0, 2))  # binary
-        print('Genotype: ', self.getGenotype())
+        print('Genotype: ', self.toString())
 
     # converts binary array to single binary value
-    def getGenotype(self):
-        return int(''.join([str(elem) for elem in self.genotype]))
+    def toString(self, genotype: [] = None):
+        if genotype is not None:
+            return int(''.join([str(elem) for elem in genotype]))
+        else:
+            return int(''.join([str(elem) for elem in self.genotype]))
 
-    # calculates bin -> value
+    def getPartOfGenotype(self, startIdx, endIdx):
+        return self.genotype[startIdx:endIdx]
+
+    # calculates bin -> values
     def calculateValue(self):
-        return converter.binToDec(self.getGenotype())
+        values = []
+        for i in range(self.genotypeInfo.parameters):
+            startIdx = np.sum(self.genotypeInfo.parametersWordLength[0:i])
+            parameterGenotype = self.getPartOfGenotype(
+                int(startIdx),
+                int(startIdx + self.genotypeInfo.parametersWordLength[i])
+            )
+            values.append(converter.binToDec(self.toString(parameterGenotype)))
+        return values

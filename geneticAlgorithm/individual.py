@@ -11,7 +11,7 @@ class Individual:
         self._problem = None
         self._setting = None
 
-        self._value = None
+        self._values = None
         self._fenotype = None
         self._adaptation = None
 
@@ -25,7 +25,7 @@ class Individual:
     def setGenotype(self, genotype:[]):
         self.genotype.genotype = copy.deepcopy(genotype)
 
-        self._value = self.genotype.calculateValue()
+        self._values = self.genotype.calculateValue()
         self._calculateFenotype()
         self._calculateAdaptation()
 
@@ -35,20 +35,20 @@ class Individual:
         g.randomize()
         self.genotype = g
 
-        self._value = self.genotype.calculateValue()
+        self._values = self.genotype.calculateValue()
         self._calculateFenotype()
         self._calculateAdaptation()
 
     # calculates fenotype value
     def _calculateFenotype(self):
-        self._fenotype = self._problem.goalFunction(self._value)
+        self._fenotype = self._problem.goalFunction(self._values)
 
     # sets adaptation function value for individual
     def _calculateAdaptation(self):
         self._adaptation = self._problem.adaptationFunction(self._fenotype)
 
     def getValue(self):
-        return self._value
+        return self._values
 
     def getFenotype(self):
         return self._fenotype

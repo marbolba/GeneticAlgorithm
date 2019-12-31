@@ -5,17 +5,17 @@ from problem.abstractProblem import Problem, GenotypeInfo
 
 class X2GenotypeInfo(GenotypeInfo):
     def __init__(self):
-        self.parameters = 1
-        self.parametersWordLength = [6]
-        self.parametersDomain = [(0, 20)]  # eg.[(0, 20), (0, 40)]
+        self.parameters = 2
+        self.parametersWordLength = [6,6]
+        self.parametersDomain = [(0, 20),(0, 20)]  # TODO ended here... eg.[(0, 20), (0, 40)]
 
 
 class X2(Problem):
-    def goalFunction(self, value):
-        return np.power(value, 2)
+    def goalFunction(self, values):
+        return np.power(values, 2)
 
-    def adaptationFunction(self, value):
-        return np.power(value, 2)
+    def adaptationFunction(self, values):
+        return np.power(values[0], 2)
 
     def genotypeInfo(self):
         return X2GenotypeInfo()

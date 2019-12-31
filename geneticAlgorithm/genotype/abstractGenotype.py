@@ -9,3 +9,6 @@ class Genotype:
 
     def randomize(self):
         raise NotImplementedError("The method not implemented")
+
+    def toString(self):
+        raise NotImplementedError("The method not implemented")

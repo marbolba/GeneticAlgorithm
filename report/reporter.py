@@ -5,12 +5,12 @@ from geneticAlgorithm.population import Population
 
 def reportBestIndividual(population: Population):
     sortedIndividuals = sorted(population.population, key=lambda x: x._adaptation, reverse=True)
-    print('Best individual: genome: {} value {} adaptation: {} '.format(sortedIndividuals[0].genotype.getGenotype(), sortedIndividuals[0].getValue(),
+    print('Best individual: genome: {} value {} adaptation: {} '.format(sortedIndividuals[0].genotype.toString(), sortedIndividuals[0].getValue(),
                                                                         sortedIndividuals[0].getAdaptation()))  # tmp without indiv object
 
 
 def reportAllIndividuals(population: Population):
-    print(list(map(lambda indiv: (population.genotype.getGenotype(), population.getAdaptation()), population.population)))
+    print(list(map(lambda indiv: (population.genotype.toString(), population.getAdaptation()), population.population)))
 
 
 def reportPopulationAverage(population: Population):
