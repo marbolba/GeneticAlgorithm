@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48a3038d-8a5b-43d3-ad84-3996886df213" name="Default Changelist" comment="" />
+    <list default="true" id="48a3038d-8a5b-43d3-ad84-3996886df213" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/maps/terrain-S-type-resolution" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/maps/terrain-S-type.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/maps/terrain-S-type.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/problem/map.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/rescaler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/problem/x2.py" beforeDir="false" afterPath="$PROJECT_DIR$/problem/x2.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +31,11 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="kite.configurable" />
     <property name="settings.editor.splitter.proportion" value="0.23246492" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\marci\Desktop\projects\Other\MyGA\geneticAlgorithm\genotype" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -133,16 +146,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/geneticAlgorithm/individual.py</url>
-          <line>37</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
