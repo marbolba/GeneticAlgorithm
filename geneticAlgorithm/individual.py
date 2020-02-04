@@ -30,7 +30,7 @@ class Individual:
         self._calculateAdaptation()
 
     def _initGenotype(self):
-        g = BinaryGenotype()
+        g = self._problem.genotypeInfo().type()
         g.setGenotypeInfo(self._problem.genotypeInfo())
         g.randomize()
         self.genotype = g
