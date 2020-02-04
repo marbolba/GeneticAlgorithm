@@ -53,5 +53,11 @@ class BinaryGenotype(Genotype):
                 int(startIdx),
                 int(startIdx + self.genotypeInfo.parametersWordLength[i])
             )
-            values.append(converter.binToDec(self.toString(parameterGenotype)))
+            # calculate value in it's range
+            maxVal = converter.maxBinaryValue(parameterGenotype.__len__())
+            actVal = converter.binToDec(self.toString(parameterGenotype))
+            minDomain = self.genotypeInfo.parametersDomain[i][0]
+            maxDomain = self.genotypeInfo.parametersDomain[i][1]
+            newVal = round(minDomain + (actVal/maxVal * (maxDomain-minDomain))) # values are rounded
+            values.append(newVal)
         return values

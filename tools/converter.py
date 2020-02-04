@@ -1,5 +1,4 @@
 def binToDec(binary):
-    binary1 = binary
     decimal, i, n = 0, 0, 0
     while (binary != 0):
         dec = binary % 10
@@ -7,3 +6,7 @@ def binToDec(binary):
         binary = binary // 10
         i += 1
     return decimal
+
+
+def maxBinaryValue(binaryNr):
+    return pow(2, binaryNr) - 1
