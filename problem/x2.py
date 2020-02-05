@@ -9,7 +9,7 @@ class X2GenotypeInfo(GenotypeInfo):
     def __init__(self):
         self.type = DecimalGenotype
         self.parameters = 2
-        self.parametersWordLength = [2, 2]
+        self.parametersWordLength = [1, 1]
         self.parametersDomain = [(0, 15), (0, 10)]
 
 
@@ -18,7 +18,7 @@ class X2(Problem):
         return np.power(values, 2)
 
     def adaptationFunction(self, values):
-        return values[0]
+        return values[0]+values[1]
 
     def genotypeInfo(self):
         return X2GenotypeInfo()

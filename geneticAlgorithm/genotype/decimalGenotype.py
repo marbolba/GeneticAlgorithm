@@ -7,8 +7,6 @@ from tools import converter
 class DecimalGenotype(Genotype):
     def __init__(self):
         super(DecimalGenotype, self).__init__()
-        self.minVal = 0
-        self.maxVal = 10
 
     def randomize(self):
         # guard block
@@ -18,15 +16,12 @@ class DecimalGenotype(Genotype):
 
         # binary genotype
         for i in range(self.length):
-            self.genotype.append(np.random.randint(self.minVal, self.maxVal + 1))  # decimal, customizable
+            self.genotype.append(np.random.randint(self.genotypeInfo.parametersDomain[i][0], self.genotypeInfo.parametersDomain[i][1] + 1))  # decimal, customizable
         print('Genotype: ', self.toString())
 
     # TODO make this prettier
-    def toString(self, genotype: [] = None):
-        if genotype is not None:
-            return int(''.join([str(elem) for elem in genotype]))
-        else:
-            return int(''.join([str(elem) for elem in self.genotype]))
+    def toString(self):
+        return int(''.join([str(elem) for elem in self.genotype]))
 
     def calculateValue(self):
         values = []
@@ -36,12 +31,5 @@ class DecimalGenotype(Genotype):
                 int(startIdx),
                 int(startIdx + self.genotypeInfo.parametersWordLength[i])
             )
-            # calculate value in it's range
-            maxVal = pow(10, parameterGenotype.__len__())
-            actVal = parameterGenotype.#how to convert [5,2] to 52 ?
-            print(actVal)
-            minDomain = self.genotypeInfo.parametersDomain[i][0]
-            maxDomain = self.genotypeInfo.parametersDomain[i][1]
-            newVal = round(minDomain + (actVal / maxVal * (maxDomain - minDomain)))  # values are rounded
-            values.append(newVal)
+            values.append(parameterGenotype[0])
         return values
