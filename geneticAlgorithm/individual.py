@@ -1,6 +1,5 @@
 import copy
 
-from geneticAlgorithm.genotype.binaryGenotype import BinaryGenotype
 from problem.abstractProblem import Problem
 from settings.abstractSettings import Setting
 

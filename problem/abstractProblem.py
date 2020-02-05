@@ -1,6 +1,3 @@
-from abc import ABC
-
-
 class GenotypeInfo:
     def __init__(self):
         self.type = None
@@ -21,5 +18,5 @@ class Problem:
     def adaptationFunction(self, value):
         raise NotImplementedError("The method not implemented")
 
-    def genotypeInfo(self):
+    def genotypeInfo(self) -> GenotypeInfo:
         raise NotImplementedError("The method not implemented")

@@ -18,7 +18,7 @@ class X2(Problem):
         return np.power(values, 2)
 
     def adaptationFunction(self, values):
-        return values[0]+values[1]
+        return values[0] + values[1]
 
     def genotypeInfo(self):
         return X2GenotypeInfo()
