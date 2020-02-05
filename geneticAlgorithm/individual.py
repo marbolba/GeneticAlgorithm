@@ -29,8 +29,8 @@ class Individual:
         self._calculateAdaptation()
 
     def _initGenotype(self):
-        g = self._problem.genotypeInfo().type()
-        g.setGenotypeInfo(self._problem.genotypeInfo())
+        g = self._setting.genotypeInfo().type()
+        g.setGenotypeInfo(self._setting.genotypeInfo())
         g.randomize()
         self.genotype = g
 

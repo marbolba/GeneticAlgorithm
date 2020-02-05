@@ -1,4 +1,4 @@
-from problem.abstractProblem import GenotypeInfo
+from settings.abstractSettings import GenotypeInfo
 
 
 class Genotype:

@@ -1,14 +1,3 @@
-class GenotypeInfo:
-    def __init__(self):
-        self.type = None
-        self.parameters = None
-        self.parametersWordLength = []
-        self.parametersDomain = []  # eg.[(0, 20), (0, 40)]
-
-    def validateParameters(self):
-        return self.parameters == len(self.parametersWordLength) == len(self.parametersDomain)
-
-
 class Problem:
     # Problem function
     def goalFunction(self, value):
@@ -16,7 +5,4 @@ class Problem:
 
     # Solution salary
     def adaptationFunction(self, value):
-        raise NotImplementedError("The method not implemented")
-
-    def genotypeInfo(self) -> GenotypeInfo:
         raise NotImplementedError("The method not implemented")
