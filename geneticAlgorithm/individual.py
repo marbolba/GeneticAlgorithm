@@ -1,14 +1,15 @@
 import copy
 
+from geneticAlgorithm.genotype.abstractGenotype import Genotype
 from problem.abstractProblem import Problem
 from settings.abstractSettings import Setting
 
 
 class Individual:
     def __init__(self):
-        self.genotype = None
-        self._problem = None
-        self._setting = None
+        self.genotype:Genotype = None
+        self._problem:Problem = None
+        self._setting:Setting = None
 
         self._values = None
         self._fenotype = None

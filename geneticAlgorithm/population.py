@@ -3,14 +3,13 @@ import copy
 import numpy as np
 
 from geneticAlgorithm.individual import Individual
-from geneticAlgorithm.operations.abstractOperation import Operation
 from problem.abstractProblem import Problem
 from settings.abstractSettings import Setting
 
 
 class Population:
     def __init__(self):
-        self.population:[Population] = []
+        self.population:[Individual] = []
         self._setting: Setting = None
         self._problem: Problem = None
 

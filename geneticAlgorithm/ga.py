@@ -7,9 +7,9 @@ from settings.abstractSettings import Setting
 
 class Ga:
     def __init__(self):
-        self.population = None
-        self._setting = None
-        self._problem = None
+        self.population:Population = None
+        self._setting:Setting = None
+        self._problem:Problem = None
 
     def initPopulation(self):
         # Guardian block

@@ -11,7 +11,7 @@ def runForX2():
     ga.setProblem(X2())
     ga.initPopulation()
 
-    for _ in range(15):
+    for _ in range(10):
         print("\nGeneration {}".format(_))
         # raports
         reportPopulationAverage(ga.population)
@@ -19,7 +19,7 @@ def runForX2():
 
         ga.population.rouletteReproduction()
         ga.population.singlePointCrossover()
-        ga.population.mutation(0.01)
+        ga.population.mutation()
 
 
 if __name__ == "__main__":
