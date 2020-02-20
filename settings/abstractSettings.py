@@ -1,6 +1,8 @@
 class GenotypeInfo:
     def __init__(self):
         self.type = None
+        self.mutation = None
+        self.crossover = None
         self.parameters = None
         self.parametersWordLength = []
         self.parametersDomain = []  # eg.[(0, 20), (0, 40)]

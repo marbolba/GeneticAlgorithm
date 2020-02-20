@@ -1,9 +1,13 @@
 from geneticAlgorithm.genotype.abstractGenotype import Genotype
+from geneticAlgorithm.individual import Individual
+from settings.abstractSettings import Setting
 
 
 class Operation:
-    def singlePointCrossover(self,genotype1:Genotype,genotype2:Genotype):
+    @staticmethod
+    def singlePointCrossover(population:[Individual], setting:Setting):
         raise NotImplementedError("The method not implemented")
 
-    def mutation(self,genotype:Genotype):
+    @staticmethod
+    def mutation(population:[Individual], setting:Setting):
         raise NotImplementedError("The method not implemented")

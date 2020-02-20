@@ -10,27 +10,31 @@ from settings.abstractSettings import Setting
 class Population:
     def __init__(self):
         self.population:[Individual] = []
-        self._setting: Setting = None
-        self._problem: Problem = None
+        self.setting: Setting = None
+        self.problem: Problem = None
+        self.mutationImplementation = None
+        self.crossoverImplementation = None
 
     def generateRandomPopulation(self):
         # Guardian block
-        if self._setting is None:
+        if self.setting is None:
             print("ERR: cannot generate population: lack of settings")
-        if self._problem is None:
+        if self.problem is None:
             print("ERR: cannot generate population: lack of problem")
-        for _ in range(self._setting.populationSize()):
+        for _ in range(self.setting.populationSize()):
             self.population.append(Individual())
         for individual in self.population:
-            individual.setSetting(self._setting)
+            individual.setSetting(self.setting)
         for individual in self.population:
-            individual.setProblem(self._problem)
+            individual.setProblem(self.problem)
 
     def setProblem(self, problem: Problem):
-        self._problem = problem
+        self.problem = problem
 
     def setSetting(self, setting: Setting):
-        self._setting = setting
+        self.setting = setting
+        self.crossoverImplementation = setting.genotypeInfo().crossover
+        self.mutationImplementation = setting.genotypeInfo().mutation
 
     def rouletteReproduction(self):
         # creating select chance array
@@ -60,7 +64,7 @@ class Population:
             if not i + 1 < len(self.population):
                 print('ERR: cannot perform crossover (index out of bound {}'.format(i + 1))
 
-            if self._setting.crossoverProbability() <= np.random.rand():
+            if self.setting.crossoverProbability() <= np.random.rand():
 
                 tmpGenotype1 = self.population[i].genotype.genotype.copy()  # ???
                 tmpGenotype2 = self.population[i + 1].genotype.genotype.copy()  # ???
@@ -73,11 +77,10 @@ class Population:
                 self.population[i + 1].setGenotype(tmpGenotype2.copy())  # ???
                 # print('ax:', self.population[i].genotype.genotype(), '&', self.population[i + 1].genotype.genotype(), 'in', cutPoint)
 
+    # DO NOT CHANGE
+    def crossover(self):
+        self.crossoverImplementation(self.population, self.setting)
+
     def mutation(self):
-        for indiv in self.population:
-            for geneIdx in range(len(indiv.genotype.genotype)):
-                if np.random.rand() <= self._setting.mutationProbability():
-                    tmpGenotype = indiv.genotype.genotype.copy()
-                    tmpGenotype[geneIdx] = 0 if tmpGenotype[geneIdx] == 1 else 0
-                    indiv.setGenotype(tmpGenotype.copy())
+        self.mutationImplementation(self.population, self.setting)
 

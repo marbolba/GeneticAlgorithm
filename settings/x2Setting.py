@@ -1,12 +1,16 @@
+from geneticAlgorithm.genotype.binaryGenotype import BinaryGenotype
 from geneticAlgorithm.genotype.decimalGenotype import DecimalGenotype
+from geneticAlgorithm.operations.binaryOperation import BinaryOperation
 from settings.abstractSettings import Setting, GenotypeInfo
 
 
 class X2GenotypeInfo(GenotypeInfo):
     def __init__(self):
-        self.type = DecimalGenotype
+        self.type = BinaryGenotype
+        self.crossover = BinaryOperation.singlePointCrossover
+        self.mutation = BinaryOperation.mutation
         self.parameters = 2
-        self.parametersWordLength = [1, 1]
+        self.parametersWordLength = [6, 6]
         self.parametersDomain = [(0, 15), (0, 10)]
 
 
@@ -15,7 +19,7 @@ class X2Setting(Setting):
         return 30
 
     def mutationProbability(self):
-        return 0.1
+        return 0.001
 
     def crossoverProbability(self):
         return 0.5
