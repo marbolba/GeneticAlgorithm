@@ -18,8 +18,11 @@ class BinaryGenotype(Genotype):
         print('Genotype: ', self.toString())
 
     # converts binary array to single binary value
-    def toString(self):
-        return int(''.join([str(elem) for elem in self.genotype]))
+    def toString(self,array=None):
+        if array is None:
+            return int(''.join([str(elem) for elem in self.genotype]))
+        else:
+            return int(''.join([str(elem) for elem in array]))
 
     # calculates bin -> values
     def calculateValue(self):
