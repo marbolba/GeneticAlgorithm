@@ -5,7 +5,7 @@ from geneticAlgorithm.operations.decinalOperation import DecimalOperation
 from settings.abstractSettings import Setting, GenotypeInfo
 
 
-class X2GenotypeInfo(GenotypeInfo):
+class TerrainGenotypeInfo(GenotypeInfo):
     def __init__(self):
         self.type = DecimalGenotype
 
@@ -18,7 +18,7 @@ class X2GenotypeInfo(GenotypeInfo):
         self.parametersDomain = [(0,50), (0,50)]
 
 
-class X2Setting(Setting):
+class TerrainSetting(Setting):
     def generationsNumber(self):
         return 100
 
@@ -32,4 +32,4 @@ class X2Setting(Setting):
         return 0.5
 
     def genotypeInfo(self):
-        return X2GenotypeInfo()
+        return TerrainGenotypeInfo()

@@ -3,7 +3,7 @@ import numpy as np
 from problem.abstractProblem import Problem
 
 
-class X2(Problem):
+class X2Problem(Problem):
     def goalFunction(self, values):
         return np.power(values, 2)
 

@@ -1,5 +1,5 @@
 from geneticAlgorithm.ga import Ga
-from problem.x2 import X2
+from problem.x2Problem import X2Problem
 from settings.x2Setting import X2Setting
 
 
@@ -7,7 +7,7 @@ from settings.x2Setting import X2Setting
 def runForX2():
     ga = Ga()
     ga.setSetting(X2Setting())
-    ga.setProblem(X2())
+    ga.setProblem(X2Problem())
     ga.initPopulation()
 
     ga.startAlgorithm()
