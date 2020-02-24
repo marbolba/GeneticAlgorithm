@@ -1,32 +1,80 @@
+import copy
+from random import normalvariate
+
+import numpy as np
+
 from geneticAlgorithm.genotype.abstractGenotype import Genotype
+from geneticAlgorithm.individual import Individual
 from geneticAlgorithm.operations.abstractOperation import Operation
+from settings.abstractSettings import Setting
 
 
 class DecimalOperation(Operation):
-    def singlePointCrossover(self,genotype1:Genotype,genotype2:Genotype):
-        for i in range(0, len(self.population), 2):
+    @staticmethod
+    def rouletteReproduction(population: [Individual]):
+        # creating select chance array
+        adaptationSum = 0
+        selectChance = []
+        for individual in population:
+            adaptationSum += individual.getAdaptation()
+        for individual in population:
+            selectChance.append(individual.getAdaptation() / adaptationSum)
+        selectChance = np.cumsum(selectChance)
+
+        # select new population
+        newPopulation = []
+        selected = np.random.rand(len(population))
+        for sel in selected:
+            for propIdx in range(len(selectChance)):
+                if sel <= selectChance[propIdx]:
+                    newPopulation.append(copy.deepcopy(population[propIdx]))
+                    break
+
+        # override with new population
+        population = newPopulation
+
+    @staticmethod
+    def singlePointCrossover(population: [Individual], setting: Setting):  ##this is averaging crossover
+        for i in range(0, len(population), 2):
             # guard block
-            if not i + 1 < len(self.population):
+            if not i + 1 < len(population):
                 print('ERR: cannot perform crossover (index out of bound {}'.format(i + 1))
 
-            if self._setting.crossoverProbability() <= np.random.rand():
+            if setting.crossoverProbability() <= np.random.rand():
+                tmpGenotype1 = population[i].genotype.genotype.copy()  # ???
+                tmpGenotype2 = population[i + 1].genotype.genotype.copy()  # ???
+                # randomly select in-between point
+                for gen in range(population[i].genotype.length):
+                    diff = population[i + 1].genotype.genotype[gen] - population[i].genotype.genotype[gen]
+                    if diff == 0:
+                        cutPoint = 0
+                    elif diff > 0:
+                        cutPoint = np.random.randint(0,diff+1)
+                    else:
+                        cutPoint = np.random.randint(diff,0+1)
+                    # print('cx:(',gen,')', tmpGenotype1, '&', tmpGenotype2,'in', cutPoint)
+                    tmpGenotype1[gen] = tmpGenotype1[gen]+cutPoint
+                    tmpGenotype2[gen] = tmpGenotype2[gen]-cutPoint
+                    # print('ax:(',gen,')', tmpGenotype1, '&', tmpGenotype2, 'in', cutPoint)
+                population[i].setGenotype(tmpGenotype1.copy())  # ???
+                population[i + 1].setGenotype(tmpGenotype2.copy())  # ???
 
-                tmpGenotype1 = self.population[i].genotype.genotype.copy()  # ???
-                tmpGenotype2 = self.population[i + 1].genotype.genotype.copy()  # ???
-                # randomly select cut point
-                cutPoint = np.random.randint(1, self.population[i].genotype.length)
-                # print('cx:', self.population[i].genotype.genotype(), '&', self.population[i + 1].genotype.genotype(), 'in', cutPoint)
-                for j in range(cutPoint, self.population[i].genotype.length):
-                    tmpGenotype1[j], tmpGenotype2[j] = tmpGenotype2[j], tmpGenotype1[j]
-                self.population[i].setGenotype(tmpGenotype1.copy())  # ???
-                self.population[i + 1].setGenotype(tmpGenotype2.copy())  # ???
-                # print('ax:', self.population[i].genotype.genotype(), '&', self.population[i + 1].genotype.genotype(), 'in', cutPoint)
-
-    def mutation(self,genotype:Genotype):
-        for indiv in self.population:
-            for geneIdx in range(len(indiv.genotype.genotype)):
-                if np.random.rand() <= self._setting.mutationProbability():
+    @staticmethod
+    def mutation(population:[Individual], setting:Setting):
+        for indiv in population:
+            for geneIdx in range(indiv.genotype.length):
+                if np.random.rand() <= setting.mutationProbability():
+                    # np.random.rand()
                     tmpGenotype = indiv.genotype.genotype.copy()
-                    tmpGenotype[geneIdx] = 0 if tmpGenotype[geneIdx] == 1 else 0
+                    # print("MUT 1/2",tmpGenotype[geneIdx])
+                    # do rozkladu normalnego
+                    mu = tmpGenotype[geneIdx]
+                    sigma = 1
+                    x = int(round(normalvariate(mu,sigma)))
+                    # check if is in bounds
+                    if x < setting.genotypeInfo().parametersDomain[geneIdx][0] or x > setting.genotypeInfo().parametersDomain[geneIdx][1]:
+                        tmpGenotype[geneIdx] = tmpGenotype[geneIdx] # no change
+                    else:
+                        tmpGenotype[geneIdx] = x
+                    # print("MUT 2/2", tmpGenotype[geneIdx])
                     indiv.setGenotype(tmpGenotype.copy())
-
