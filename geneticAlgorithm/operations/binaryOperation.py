@@ -45,12 +45,12 @@ class BinaryOperation(Operation):
                 tmpGenotype2 = population[i + 1].genotype.genotype.copy()  # ???
                 # randomly select cut point
                 cutPoint = np.random.randint(1, population[i].genotype.length)
-                # print('cx:', self.population[i].genotype.genotype(), '&', self.population[i + 1].genotype.genotype(), 'in', cutPoint)
+                #print('cx:',i, population[i].genotype.genotype, '&', population[i + 1].genotype.genotype, 'in', cutPoint)
                 for j in range(cutPoint, population[i].genotype.length):
                     tmpGenotype1[j], tmpGenotype2[j] = tmpGenotype2[j], tmpGenotype1[j]
                 population[i].setGenotype(tmpGenotype1.copy())  # ???
                 population[i + 1].setGenotype(tmpGenotype2.copy())  # ???
-                # print('ax:', self.population[i].genotype.genotype(), '&', self.population[i + 1].genotype.genotype(), 'in', cutPoint)
+                #print('ax:',i, population[i].genotype.genotype, '&', population[i + 1].genotype.genotype, 'in', cutPoint)
 
     @staticmethod
     def mutation(population:[Individual], setting:Setting):

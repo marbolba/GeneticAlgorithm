@@ -1,6 +1,5 @@
 from geneticAlgorithm.ga import Ga
 from problem.x2 import X2
-from report.reporter import reportBestIndividual, reportPopulationAverage
 from settings.x2Setting import X2Setting
 
 
@@ -11,15 +10,7 @@ def runForX2():
     ga.setProblem(X2())
     ga.initPopulation()
 
-    for _ in range(10):
-        print("\nGeneration {}".format(_))
-        # raports
-        reportPopulationAverage(ga.population)
-        reportBestIndividual(ga.population)
-
-        ga.population.reproduction()
-        ga.population.crossover()
-        ga.population.mutation()
+    ga.startAlgorithm()
 
 
 if __name__ == "__main__":

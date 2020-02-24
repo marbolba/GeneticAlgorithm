@@ -16,6 +16,9 @@ class GenotypeInfo:
 
 
 class Setting:
+    def generationsNumber(self):
+        raise NotImplementedError("The method not implemented")
+
     def populationSize(self):
         raise NotImplementedError("The method not implemented")
 

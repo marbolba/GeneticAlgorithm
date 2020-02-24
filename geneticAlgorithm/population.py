@@ -34,6 +34,7 @@ class Population:
 
     def setSetting(self, setting: Setting):
         self.setting = setting
+        self.setting.genotypeInfo().validateParameters()
         self.reproductionImplementation = setting.genotypeInfo().reproduction
         self.crossoverImplementation = setting.genotypeInfo().crossover
         self.mutationImplementation = setting.genotypeInfo().mutation

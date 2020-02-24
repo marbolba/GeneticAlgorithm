@@ -8,4 +8,4 @@ class X2(Problem):
         return np.power(values, 2)
 
     def adaptationFunction(self, values):
-        return values[0] + values[1]
+        return np.power(values[0] + values[1], 2)

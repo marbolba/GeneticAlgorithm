@@ -7,16 +7,20 @@ from settings.abstractSettings import Setting, GenotypeInfo
 class X2GenotypeInfo(GenotypeInfo):
     def __init__(self):
         self.type = BinaryGenotype
+
         self.reproduction = BinaryOperation.rouletteReproduction
         self.crossover = BinaryOperation.singlePointCrossover
         self.mutation = BinaryOperation.mutation
 
         self.parameters = 2
-        self.parametersWordLength = [6, 6]
-        self.parametersDomain = [(0, 15), (0, 10)]
+        self.parametersWordLength = [4, 4]
+        self.parametersDomain = [(0, 15), (0, 15)]
 
 
 class X2Setting(Setting):
+    def generationsNumber(self):
+        return 30
+
     def populationSize(self):
         return 30
 
