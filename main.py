@@ -17,7 +17,7 @@ def runForX2():
         reportPopulationAverage(ga.population)
         reportBestIndividual(ga.population)
 
-        ga.population.rouletteReproduction()
+        ga.population.reproduction()
         ga.population.crossover()
         ga.population.mutation()
 

@@ -1,3 +1,5 @@
+import copy
+
 import numpy as np
 
 from geneticAlgorithm.genotype.abstractGenotype import Genotype
@@ -8,6 +10,29 @@ from settings.abstractSettings import Setting
 
 
 class BinaryOperation(Operation):
+    @staticmethod
+    def rouletteReproduction(population:[Individual]):
+        # creating select chance array
+        adaptationSum = 0
+        selectChance = []
+        for individual in population:
+            adaptationSum += individual.getAdaptation()
+        for individual in population:
+            selectChance.append(individual.getAdaptation() / adaptationSum)
+        selectChance = np.cumsum(selectChance)
+
+        # select new population
+        newPopulation = []
+        selected = np.random.rand(len(population))
+        for sel in selected:
+            for propIdx in range(len(selectChance)):
+                if sel <= selectChance[propIdx]:
+                    newPopulation.append(copy.deepcopy(population[propIdx]))
+                    break
+
+        # override with new population
+        population = newPopulation
+
     @staticmethod
     def singlePointCrossover(population:[Individual], setting:Setting):
         for i in range(0, len(population), 2):
