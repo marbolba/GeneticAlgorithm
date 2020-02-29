@@ -2,7 +2,7 @@ import sys
 
 from geneticAlgorithm.population import Population
 from problem.abstractProblem import Problem
-from report.reporter import reportPopulationAverage, reportBestIndividual
+from report.reporter import reportPopulationAverage, reportBestIndividual, reportOutputPath
 from settings.abstractSettings import Setting
 
 
@@ -22,6 +22,7 @@ class Ga:
             self.population.reproduction()
             self.population.crossover()
             self.population.mutation()
+        reportOutputPath(self.population)
 
     def initPopulation(self):
         # Guardian block

@@ -1,6 +1,7 @@
 import numpy as np
 
 from geneticAlgorithm.population import Population
+from tools.terrainHandler import TerrainHandler
 
 
 def reportBestIndividual(population: Population):
@@ -16,3 +17,10 @@ def reportAllIndividuals(population: Population):
 def reportPopulationAverage(population: Population):
     adaptationAvg = np.average(list(map(lambda indiv: indiv.getAdaptation(), population.population)))
     print('Population average: adaptation: {} '.format(adaptationAvg))  # tmp without indiv object
+
+
+def reportOutputPath(population: Population):
+    sortedIndividuals = sorted(population.population, key=lambda x: x._adaptation, reverse=True)
+    values = sortedIndividuals[0].getFenotype()
+    values = [[0, 0]] + values + [[140, 10]]
+    TerrainHandler.drawTerrainWithPoints(values)
