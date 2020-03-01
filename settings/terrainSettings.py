@@ -9,7 +9,7 @@ from tools.terrainHandler import TerrainHandler
 
 
 class TerrainGenotypeInfo(GenotypeInfo):
-    TerrainHandler.setName("ctype")
+    TerrainHandler.setName("ctype2")
     size = TerrainHandler.getSize()
     print("terrainSize: {}".format(size))
 
@@ -21,9 +21,10 @@ class TerrainGenotypeInfo(GenotypeInfo):
         self.crossover = DecimalOperation.singlePointCrossover
         self.mutation = DecimalOperation.mutation
 
-        self.parameters = 6
-        self.parametersWordLength = [1, 1, 1, 1, 1, 1]
+        self.parameters = 8
+        self.parametersWordLength = [1, 1, 1, 1, 1, 1, 1, 1]
         self.parametersDomain = [(0,TerrainGenotypeInfo.size[0]-1), (0,TerrainGenotypeInfo.size[1]-1),
+                                 (0,TerrainGenotypeInfo.size[0]-1), (0,TerrainGenotypeInfo.size[1]-1),
                                  (0,TerrainGenotypeInfo.size[0]-1), (0,TerrainGenotypeInfo.size[1]-1),
                                  (0,TerrainGenotypeInfo.size[0]-1), (0,TerrainGenotypeInfo.size[1]-1)
                                  ]
@@ -31,13 +32,13 @@ class TerrainGenotypeInfo(GenotypeInfo):
 
 class TerrainSetting(Setting):
     def generationsNumber(self):
-        return 100
+        return 50
 
     def populationSize(self):
-        return 30
+        return 100
 
     def mutationProbability(self):
-        return 0.1
+        return 1
 
     def crossoverProbability(self):
         return 0.5
