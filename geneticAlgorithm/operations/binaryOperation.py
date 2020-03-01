@@ -11,27 +11,27 @@ from settings.abstractSettings import Setting
 
 class BinaryOperation(Operation):
     @staticmethod
-    def rouletteReproduction(population:[Individual]):
+    def rouletteReproduction(population: Population):
         # creating select chance array
         adaptationSum = 0
         selectChance = []
-        for individual in population:
+        for individual in population.population:
             adaptationSum += individual.getAdaptation()
-        for individual in population:
+        for individual in population.population:
             selectChance.append(individual.getAdaptation() / adaptationSum)
         selectChance = np.cumsum(selectChance)
 
         # select new population
         newPopulation = []
-        selected = np.random.rand(len(population))
+        selected = np.random.rand(len(population.population))
         for sel in selected:
             for propIdx in range(len(selectChance)):
                 if sel <= selectChance[propIdx]:
-                    newPopulation.append(copy.deepcopy(population[propIdx]))
+                    newPopulation.append(copy.deepcopy(population.population[propIdx]))
                     break
 
         # override with new population
-        population = newPopulation
+        return newPopulation
 
     @staticmethod
     def singlePointCrossover(population:[Individual], setting:Setting):

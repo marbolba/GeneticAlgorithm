@@ -9,10 +9,11 @@ from settings.abstractSettings import Setting
 
 class Population:
     def __init__(self):
-        self.population:[Individual] = []
+        self.population: [Individual] = []
         self.setting: Setting = None
         self.problem: Problem = None
         self.reproductionImplementation = None
+        self.successionImplementation = None
         self.mutationImplementation = None
         self.crossoverImplementation = None
 
@@ -29,6 +30,9 @@ class Population:
         for individual in self.population:
             individual.setProblem(self.problem)
 
+    def setPopulation(self, newPopulation: [Individual]):
+        self.population = newPopulation
+
     def setProblem(self, problem: Problem):
         self.problem = problem
 
@@ -36,16 +40,19 @@ class Population:
         self.setting = setting
         self.setting.genotypeInfo().validateParameters()
         self.reproductionImplementation = setting.genotypeInfo().reproduction
+        self.successionImplementation = setting.genotypeInfo().succession
         self.crossoverImplementation = setting.genotypeInfo().crossover
         self.mutationImplementation = setting.genotypeInfo().mutation
 
     # DO NOT CHANGE
     def reproduction(self):
-        self.reproductionImplementation(self.population)
+        return self.reproductionImplementation(self)
+
+    def succession(self, newPopulation):
+        self.successionImplementation(self, newPopulation)
 
     def crossover(self):
         self.crossoverImplementation(self.population, self.setting)
 
     def mutation(self):
         self.mutationImplementation(self.population, self.setting)
-

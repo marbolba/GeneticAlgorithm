@@ -19,7 +19,8 @@ class Ga:
             reportPopulationAverage(self.population)
             reportBestIndividual(self.population)
 
-            self.population.reproduction()
+            newPopulation = self.population.reproduction()
+            self.population.succession(newPopulation)
             self.population.crossover()
             self.population.mutation()
         reportOutputPath(self.population)

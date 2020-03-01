@@ -3,6 +3,7 @@ class GenotypeInfo:
         self.type = None
 
         self.reproduction = None
+        self.succession = None
         self.mutation = None
         self.crossover = None
 
@@ -12,7 +13,8 @@ class GenotypeInfo:
 
     def validateParameters(self):
         return self.parameters == len(self.parametersWordLength) == len(self.parametersDomain) \
-               and self.type is not None and self.reproduction is not None and self.mutation is not None and self.crossover
+               and self.type is not None and self.reproduction is not None and self.succession is not None \
+               and self.mutation is not None and self.crossover is not None
 
 
 class Setting:
