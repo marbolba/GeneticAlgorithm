@@ -15,19 +15,21 @@ class TerrainProblem(Problem):
             points.append([values[i],values[i+1]])
         return points
 
-    def adaptationFunction(self, values):
+    def adaptationFunction(self, values:[]):
         # settings
         distanceMax = 150
         costMax = 1200
+        startPoint = [0,0]
+        endPoint = [140, 60]
+
         # składowa dystansu
-        point1, point2 = (values[2][0], values[2][1]), (140, 60)
-        distanceElement = TerrainHandler.distance(point1, point2)
+        distanceElement = TerrainHandler.distance((values[3][0], values[3][1]), endPoint)
 
-        # toughness
-
+        # skladowa kosztu podróży
         cost = 0
-        # cost of travel
+        values.insert(0,[0,0])
         for i in range(0,len(values)-1):
             cost = cost + TerrainHandler.travelCost(values[i], values[i+1])
+
         # print("distanceElement:",distanceElement,", cost of travel: ", cost,"adaptation",1000*(distanceMax - distanceElement)/distanceMax + 1000*(costMax-cost)/costMax)
-        return 1000*(distanceMax - distanceElement)/distanceMax + 3000*(costMax-cost)/costMax
+        return 4000*(distanceMax - distanceElement)/distanceMax + 3000*(costMax-cost)/costMax

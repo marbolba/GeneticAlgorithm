@@ -22,5 +22,4 @@ def reportPopulationAverage(population: Population):
 def reportOutputPath(population: Population):
     sortedIndividuals = sorted(population.population, key=lambda x: x._adaptation, reverse=True)
     values = sortedIndividuals[0].getFenotype()
-    values = [[0, 0]] + values + [[140, 10]]
     TerrainHandler.drawTerrainWithPoints(values)
