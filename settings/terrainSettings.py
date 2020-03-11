@@ -9,7 +9,7 @@ from tools.terrainHandler import TerrainHandler
 
 
 class TerrainGenotypeInfo(GenotypeInfo):
-    TerrainHandler.setName("ctype2")
+    TerrainHandler.setName("ctype")
     size = TerrainHandler.getSize()
     print("terrainSize: {}".format(size))
 
@@ -23,12 +23,8 @@ class TerrainGenotypeInfo(GenotypeInfo):
         self.mutation = DecimalOperation.mutation
 
         self.parameters = 8
-        self.parametersWordLength = [1, 1, 1, 1, 1, 1, 1, 1]
-        self.parametersDomain = [(0,TerrainGenotypeInfo.size[0]-1), (0,TerrainGenotypeInfo.size[1]-1),
-                                 (0,TerrainGenotypeInfo.size[0]-1), (0,TerrainGenotypeInfo.size[1]-1),
-                                 (0,TerrainGenotypeInfo.size[0]-1), (0,TerrainGenotypeInfo.size[1]-1),
-                                 (0,TerrainGenotypeInfo.size[0]-1), (0,TerrainGenotypeInfo.size[1]-1)
-                                 ]
+        self.parametersWordLength = list(1 for i in range(0,self.parameters))
+        self.parametersDomain = list (((0,TerrainGenotypeInfo.size[0]-1), (0,TerrainGenotypeInfo.size[1]-1)) for i in range(0,int(self.parameters/2)))
 
 
 class TerrainSetting(Setting):

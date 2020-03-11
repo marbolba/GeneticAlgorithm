@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 class TerrainHandler:
-    fileName = "ctype"
+    fileName = ""
     terrain = []
     domain = ()
 

@@ -7,7 +7,6 @@ from scipy.spatial import distance
 
 
 class TerrainProblem(Problem):
-    TerrainHandler.setName("ctype2")
 
     def goalFunction(self, values):
         points = []
