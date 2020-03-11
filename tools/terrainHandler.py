@@ -1,16 +1,23 @@
+import os
 import numpy as np
 from scipy.spatial import distance
 import matplotlib.pyplot as plt
 
 
 class TerrainHandler:
-    fileName = ""
+    folderPath = ""
     terrain = []
     domain = ()
 
     @staticmethod
     def readFromFile(fileName):
         return np.load(fileName)
+    
+    @staticmethod
+    def checkIfFolderExists():
+        if not (os.path.exists(TerrainHandler.folderPath)):
+            # create the directory you want to save to
+            os.mkdir(TerrainHandler.folderPath)
 
     @staticmethod
     def slope(point1, point2):
@@ -21,12 +28,6 @@ class TerrainHandler:
     @staticmethod
     def distance(point1, point2):
         return distance.euclidean(point1, point2)
-
-    @staticmethod
-    def setName(fileName):
-        TerrainHandler.fileName = fileName
-        TerrainHandler.terrain = TerrainHandler.readFromFile("assets/terrains/{}/terrain.npy".format(fileName))
-        TerrainHandler.domain = TerrainHandler.readFromFile("assets/terrains/{}/size.npy".format(fileName))
 
     @staticmethod
     def getSize():
@@ -52,23 +53,23 @@ class TerrainHandler:
                 cost = cost + TerrainHandler.getTerrainToughness(x, y)
             return cost
 
+
     @staticmethod
-    def drawTerrain():
-        plt.matshow(TerrainHandler.terrain)
-        plt.colorbar()
-        # self.checkIfFolderExists()
-        # plt.savefig("{}{}-2d.png".format(self.folderPath, self.label))
-        plt.show()
+    def setName(folderName):
+        TerrainHandler.folderPath = "assets/terrains/{}/".format(folderName)
+        TerrainHandler.terrain = TerrainHandler.readFromFile("assets/terrains/{}/terrain.npy".format(folderName))
+        TerrainHandler.domain = TerrainHandler.readFromFile("assets/terrains/{}/size.npy".format(folderName))
 
     @staticmethod
     def drawTerrainWithPoints(points: [int]):
         # terrain
         plt.matshow(TerrainHandler.terrain)
         plt.colorbar()
-        # self.checkIfFolderExists()
-        # plt.savefig("{}{}-2d.png".format(self.folderPath, self.label))
 
         # points
         items = np.transpose([list(item) for item in points])
         plt.plot(items[0], items[1], 'xr-')
+        TerrainHandler.checkIfFolderExists()
+        plt.savefig("{}result-2d.png".format(TerrainHandler.folderPath))
+        
         plt.show()

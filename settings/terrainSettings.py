@@ -9,9 +9,8 @@ from tools.terrainHandler import TerrainHandler
 
 
 class TerrainGenotypeInfo(GenotypeInfo):
-    TerrainHandler.setName("ctype")
+    TerrainHandler.setName("11-mar-2020_211539")
     size = TerrainHandler.getSize()
-    print("terrainSize: {}".format(size))
 
     def __init__(self):
 
