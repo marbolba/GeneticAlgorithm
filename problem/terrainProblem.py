@@ -19,10 +19,10 @@ class TerrainProblem(Problem):
         distanceMax = 150
         costMax = 1200
         startPoint = [0,0]
-        endPoint = [140, 60]
+        endPoint = TerrainHandler.getSize()
 
-        # składowa dystansu
-        distanceElement = TerrainHandler.distance((values[3][0], values[3][1]), endPoint)
+        # składowa dystansu - ostatni element do endpoint
+        distanceElement = TerrainHandler.distance((values[len(values)-1][0], values[len(values)-1][1]), endPoint)
 
         # skladowa kosztu podróży
         cost = 0
