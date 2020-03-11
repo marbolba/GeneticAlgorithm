@@ -12,9 +12,16 @@ class GenotypeInfo:
         self.parametersDomain = []  # eg.[(0, 20), (0, 40)]
 
     def validateParameters(self):
-        return self.parameters == len(self.parametersWordLength) == len(self.parametersDomain) \
-               and self.type is not None and self.reproduction is not None and self.succession is not None \
-               and self.mutation is not None and self.crossover is not None
+        return (
+            self.parameters
+            == len(self.parametersWordLength)
+            == len(self.parametersDomain)
+            and self.type is not None
+            and self.reproduction is not None
+            and self.succession is not None
+            and self.mutation is not None
+            and self.crossover is not None
+        )
 
 
 class Setting:

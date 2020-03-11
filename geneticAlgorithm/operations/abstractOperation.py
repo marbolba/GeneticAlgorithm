@@ -10,11 +10,11 @@ class Operation:
         raise NotImplementedError("The method not implemented")
 
     @staticmethod
-    def singlePointCrossover(population:[Individual], setting:Setting):
+    def singlePointCrossover(population: [Individual], setting: Setting):
         raise NotImplementedError("The method not implemented")
 
     @staticmethod
-    def mutation(population:[Individual], setting:Setting):
+    def mutation(population: [Individual], setting: Setting):
         raise NotImplementedError("The method not implemented")
 
     # SUCCESSION
@@ -24,7 +24,9 @@ class Operation:
 
     @staticmethod
     def eliteSuccession(population: Population, newPopulation: [Individual]):
-        sortedIndividuals = sorted(population.population, key=lambda x: x._adaptation, reverse=True)
+        sortedIndividuals = sorted(
+            population.population, key=lambda x: x._adaptation, reverse=True
+        )
         newPopulation[0] = sortedIndividuals[0]
         newPopulation[3] = sortedIndividuals[1]
         newPopulation[5] = sortedIndividuals[2]

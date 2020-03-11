@@ -1,5 +1,4 @@
 class Rescaler:
-
     @staticmethod
     def renormalize(n, range1, range2):
         delta1 = range1[1] - range1[0]

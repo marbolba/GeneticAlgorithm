@@ -2,15 +2,19 @@ import sys
 
 from geneticAlgorithm.population import Population
 from problem.abstractProblem import Problem
-from report.reporter import reportPopulationAverage, reportBestIndividual, reportOutputPath
+from report.reporter import (
+    reportPopulationAverage,
+    reportBestIndividual,
+    reportOutputPath,
+)
 from settings.abstractSettings import Setting
 
 
 class Ga:
     def __init__(self):
-        self.population:Population = None
-        self.setting:Setting = None
-        self.problem:Problem = None
+        self.population: Population = None
+        self.setting: Setting = None
+        self.problem: Problem = None
 
     def startAlgorithm(self):
         for generationId in range(self.setting.generationsNumber()):
@@ -28,7 +32,7 @@ class Ga:
     def initPopulation(self):
         # Guardian block
         if self.setting is None or self.problem is None:
-            print('ERR: setting or problem no set, cannot initialize population')
+            print("ERR: setting or problem no set, cannot initialize population")
             sys.exit(0)
 
         self.population = Population()
@@ -41,5 +45,3 @@ class Ga:
 
     def setSetting(self, setting: Setting):
         self.setting = setting
-
-

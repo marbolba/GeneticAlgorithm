@@ -15,7 +15,7 @@ class X2GenotypeInfo(GenotypeInfo):
 
         self.parameters = 2
         self.parametersWordLength = [1, 1]
-        self.parametersDomain = [(0,50), (0,50)]
+        self.parametersDomain = [(0, 50), (0, 50)]
 
 
 class X2Setting(Setting):

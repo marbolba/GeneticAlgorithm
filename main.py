@@ -5,7 +5,6 @@ from settings.terrainSettings import TerrainSetting
 from settings.x2Setting import X2Setting
 
 
-
 def runForX2():
     ga = Ga()
     ga.setSetting(X2Setting())
@@ -14,6 +13,7 @@ def runForX2():
 
     ga.startAlgorithm()
 
+
 def runForTerrain():
     ga = Ga()
     ga.setSetting(TerrainSetting())
@@ -21,6 +21,7 @@ def runForTerrain():
     ga.initPopulation()
 
     ga.startAlgorithm()
+
 
 if __name__ == "__main__":
     runForTerrain()

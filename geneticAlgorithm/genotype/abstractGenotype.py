@@ -4,7 +4,7 @@ from settings.abstractSettings import GenotypeInfo
 class Genotype:
     def __init__(self):
         self.genotype = []
-        self.genotypeInfo:GenotypeInfo = None
+        self.genotypeInfo: GenotypeInfo = None
         self.length = 0
 
     def setGenotypeInfo(self, genotypeInfo: GenotypeInfo):

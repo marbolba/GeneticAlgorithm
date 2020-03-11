@@ -12,7 +12,7 @@ class TerrainHandler:
     @staticmethod
     def readFromFile(fileName):
         return np.load(fileName)
-    
+
     @staticmethod
     def checkIfFolderExists():
         if not (os.path.exists(TerrainHandler.folderPath)):
@@ -53,12 +53,15 @@ class TerrainHandler:
                 cost = cost + TerrainHandler.getTerrainToughness(x, y)
             return cost
 
-
     @staticmethod
     def setName(folderName):
         TerrainHandler.folderPath = "assets/terrains/{}/".format(folderName)
-        TerrainHandler.terrain = TerrainHandler.readFromFile("assets/terrains/{}/terrain.npy".format(folderName))
-        TerrainHandler.domain = TerrainHandler.readFromFile("assets/terrains/{}/size.npy".format(folderName))
+        TerrainHandler.terrain = TerrainHandler.readFromFile(
+            "assets/terrains/{}/terrain.npy".format(folderName)
+        )
+        TerrainHandler.domain = TerrainHandler.readFromFile(
+            "assets/terrains/{}/size.npy".format(folderName)
+        )
 
     @staticmethod
     def drawTerrainWithPoints(points: [int]):
@@ -68,8 +71,8 @@ class TerrainHandler:
 
         # points
         items = np.transpose([list(item) for item in points])
-        plt.plot(items[0], items[1], 'xr-')
+        plt.plot(items[0], items[1], "xr-")
         TerrainHandler.checkIfFolderExists()
         plt.savefig("{}result-2d.png".format(TerrainHandler.folderPath))
-        
+
         plt.show()

@@ -21,15 +21,18 @@ class TerrainGenotypeInfo(GenotypeInfo):
         self.crossover = DecimalOperation.singlePointCrossover
         self.mutation = DecimalOperation.mutation
 
-        self.parameters = 6
-        self.parametersWordLength = list(1 for i in range(0,self.parameters))
-        self.parametersDomain = list ((0,TerrainGenotypeInfo.size[i%2]-1) for i in range(0,int(self.parameters)))
+        self.parameters = 8
+        self.parametersWordLength = list(1 for i in range(0, self.parameters))
+        self.parametersDomain = list(
+            (0, TerrainGenotypeInfo.size[i % 2] - 1)
+            for i in range(0, int(self.parameters))
+        )
 
 
 class TerrainSetting(Setting):
-    def  __init__(self):
-        self.terrainGenotypeInfo:TerrainGenotypeInfo = TerrainGenotypeInfo()
-    
+    def __init__(self):
+        self.terrainGenotypeInfo: TerrainGenotypeInfo = TerrainGenotypeInfo()
+
     def generationsNumber(self):
         return 30
 

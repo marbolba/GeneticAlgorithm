@@ -7,9 +7,9 @@ from settings.abstractSettings import Setting
 
 class Individual:
     def __init__(self):
-        self.genotype:Genotype = None
-        self._problem:Problem = None
-        self._setting:Setting = None
+        self.genotype: Genotype = None
+        self._problem: Problem = None
+        self._setting: Setting = None
 
         self._values = None
         self._fenotype = None
@@ -22,7 +22,7 @@ class Individual:
     def setSetting(self, setting: Setting):
         self._setting = setting
 
-    def setGenotype(self, genotype:[]):
+    def setGenotype(self, genotype: []):
         self.genotype.genotype = copy.deepcopy(genotype)
 
         self._values = self.genotype.calculateValue()

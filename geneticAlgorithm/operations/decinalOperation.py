@@ -36,18 +36,25 @@ class DecimalOperation(Operation):
 
     # CROSSOVER
     @staticmethod
-    def singlePointCrossover(population: [Individual], setting: Setting):  ##this is averaging crossover
+    def singlePointCrossover(
+        population: [Individual], setting: Setting
+    ):  ##this is averaging crossover
         for i in range(0, len(population), 2):
             # guard block
             if not i + 1 < len(population):
-                print('ERR: cannot perform crossover (index out of bound {}'.format(i + 1))
+                print(
+                    "ERR: cannot perform crossover (index out of bound {}".format(i + 1)
+                )
 
             if setting.crossoverProbability() <= np.random.rand():
                 tmpGenotype1 = population[i].genotype.genotype.copy()  # ???
                 tmpGenotype2 = population[i + 1].genotype.genotype.copy()  # ???
                 # randomly select in-between point
                 for gen in range(population[i].genotype.length):
-                    diff = population[i + 1].genotype.genotype[gen] - population[i].genotype.genotype[gen]
+                    diff = (
+                        population[i + 1].genotype.genotype[gen]
+                        - population[i].genotype.genotype[gen]
+                    )
                     if diff == 0:
                         cutPoint = 0
                     elif diff > 0:
@@ -75,7 +82,10 @@ class DecimalOperation(Operation):
                     sigma = 1
                     x = int(round(normalvariate(mu, sigma)))
                     # check if is in bounds
-                    if x < setting.genotypeInfo().parametersDomain[geneIdx][0] or x > setting.genotypeInfo().parametersDomain[geneIdx][1]:
+                    if (
+                        x < setting.genotypeInfo().parametersDomain[geneIdx][0]
+                        or x > setting.genotypeInfo().parametersDomain[geneIdx][1]
+                    ):
                         tmpGenotype[geneIdx] = tmpGenotype[geneIdx]  # no change
                     else:
                         tmpGenotype[geneIdx] = x
