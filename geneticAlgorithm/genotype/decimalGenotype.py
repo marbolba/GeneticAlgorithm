@@ -25,7 +25,7 @@ class DecimalGenotype(Genotype):
 
     def calculateValue(self):
         values = []
-        for i in range(self.genotypeInfo.parameters):
+        for i in range(0,self.genotypeInfo.parameters):
             startIdx = np.sum(self.genotypeInfo.parametersWordLength[0:i])
             parameterGenotype = self.getPartOfGenotype(
                 int(startIdx),
