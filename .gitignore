@@ -127,3 +127,6 @@ dmypy.json
 
 # VS code debugger configuration
 launch.json
+
+# Particular terrains
+assets/terrains/
