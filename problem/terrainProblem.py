@@ -22,9 +22,7 @@ class TerrainProblem(Problem):
         costMax = 2000
 
         # składowa dystansu - ostatni element do endpoint
-        distanceElement = TerrainHandler.distance(
-            (values[len(values) - 1][0], values[len(values) - 1][1]), endPoint
-        )
+        distanceElement = TerrainHandler.distance((values[len(values) - 1][0], values[len(values) - 1][1]), endPoint)
 
         # skladowa kosztu podróży
         cost = 0
@@ -33,8 +31,5 @@ class TerrainProblem(Problem):
             cost = cost + TerrainHandler.travelCost(values[i], values[i + 1])
 
         # print("distanceElement:",distanceElement,", cost of travel: ", cost,"adaptation",1000*(distanceMax - distanceElement)/distanceMax + 1000*(costMax-cost)/costMax)
-        adaptationVal = (
-            5000 * (distanceMax - distanceElement) / distanceMax
-            + 3000 * (costMax - cost) / costMax
-        )
+        adaptationVal = 3000 * (distanceMax - distanceElement) / distanceMax + 4000 * (costMax - cost) / costMax
         return adaptationVal if adaptationVal > 0 else 0

@@ -56,12 +56,8 @@ class TerrainHandler:
     @staticmethod
     def setName(folderName):
         TerrainHandler.folderPath = "assets/terrains/{}/".format(folderName)
-        TerrainHandler.terrain = TerrainHandler.readFromFile(
-            "assets/terrains/{}/terrain.npy".format(folderName)
-        )
-        TerrainHandler.domain = TerrainHandler.readFromFile(
-            "assets/terrains/{}/size.npy".format(folderName)
-        )
+        TerrainHandler.terrain = TerrainHandler.readFromFile("assets/terrains/{}/terrain.npy".format(folderName))
+        TerrainHandler.domain = TerrainHandler.readFromFile("assets/terrains/{}/size.npy".format(folderName))
 
     @staticmethod
     def drawTerrainWithPoints(points: [int]):
