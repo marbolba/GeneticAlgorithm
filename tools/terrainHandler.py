@@ -1,4 +1,5 @@
 import os
+import math
 import numpy as np
 from scipy.spatial import distance
 import matplotlib.pyplot as plt
@@ -45,25 +46,19 @@ class TerrainHandler:
     @staticmethod
     def travelCost(point1, point2):
         cost = 0
-        if point1[0] == point2[0]:
-            # this is vertical distance
-            for y in range(min(point1[1], point2[1]), max(point1[1], point2[1])):
-                cost = cost + TerrainHandler.getPointHeight(point1[0], y)
-            return cost
-        else:
-            # this is linear distance
-            a, b = TerrainHandler.slope(point1, point2)
-            for x in range(min(point1[0], point2[0]), max(point1[0], point2[0])):
-                y = int(round(a * x + b))
-                cost = cost + TerrainHandler.getPointHeight(x, y)
-            return cost
+        fi = math.atan2(point2[1]-point1[1],point2[0]-point1[0])
+        maxR = TerrainHandler.distance(point1,point2)
+        for r in range(1,int(round(maxR))):
+            x,y = int(round(point1[0] + r*np.cos(fi))),int(round(point1[1] + r*np.sin(fi)))
+            cost = cost + TerrainHandler.getPointHeight(x,y) # TerrainHandler.getPointAccessibility(x,y)   #temporary removed
+        return cost
 
     @staticmethod
     def setName(folderName):
         TerrainHandler.folderPath = "assets/terrains/{}/".format(folderName)
         TerrainHandler.terrain = TerrainHandler.readFromFile("assets/terrains/{}/terrain.npy".format(folderName))
         TerrainHandler.accessibility = TerrainHandler.readFromFile("assets/terrains/{}/accessibility.npy".format(folderName))
-        TerrainHandler.domain = TerrainHandler.readFromFile("assets/terrains/{}/size.npy".format(folderName))
+        TerrainHandler.domain = TerrainHandler.readFromFile("assets/terrains/{}/terrain-size.npy".format(folderName))
 
     @staticmethod
     def drawTerrainWithPoints(points: [int]):
