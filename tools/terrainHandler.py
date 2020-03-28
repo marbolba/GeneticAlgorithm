@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 class TerrainHandler:
     folderPath = ""
     terrain = []
+    accessibility = []
     domain = ()
 
     @staticmethod
@@ -57,6 +58,7 @@ class TerrainHandler:
     def setName(folderName):
         TerrainHandler.folderPath = "assets/terrains/{}/".format(folderName)
         TerrainHandler.terrain = TerrainHandler.readFromFile("assets/terrains/{}/terrain.npy".format(folderName))
+        TerrainHandler.accessibility = TerrainHandler.readFromFile("assets/terrains/{}/accessibility.npy".format(folderName))
         TerrainHandler.domain = TerrainHandler.readFromFile("assets/terrains/{}/size.npy".format(folderName))
 
     @staticmethod
