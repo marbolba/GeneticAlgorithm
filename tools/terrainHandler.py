@@ -35,8 +35,12 @@ class TerrainHandler:
         return TerrainHandler.domain[1], TerrainHandler.domain[0]
 
     @staticmethod
-    def getTerrainToughness(x, y):
+    def getPointHeight(x, y):
         return TerrainHandler.terrain[y][x]
+    
+    @staticmethod
+    def getPointAccessibility(x, y):
+        return TerrainHandler.accessibility[y][x]
 
     @staticmethod
     def travelCost(point1, point2):
@@ -44,14 +48,14 @@ class TerrainHandler:
         if point1[0] == point2[0]:
             # this is vertical distance
             for y in range(min(point1[1], point2[1]), max(point1[1], point2[1])):
-                cost = cost + TerrainHandler.getTerrainToughness(point1[0], y)
+                cost = cost + TerrainHandler.getPointHeight(point1[0], y)
             return cost
         else:
             # this is linear distance
             a, b = TerrainHandler.slope(point1, point2)
             for x in range(min(point1[0], point2[0]), max(point1[0], point2[0])):
                 y = int(round(a * x + b))
-                cost = cost + TerrainHandler.getTerrainToughness(x, y)
+                cost = cost + TerrainHandler.getPointHeight(x, y)
             return cost
 
     @staticmethod
