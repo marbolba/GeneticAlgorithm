@@ -48,8 +48,10 @@ class TerrainHandler:
         cost = 0
         fi = math.atan2(point2[1]-point1[1],point2[0]-point1[0])
         maxR = TerrainHandler.distance(point1,point2)
+        sinFi = np.sin(fi)
+        cosFi = np.cos(fi)
         for r in range(1,int(round(maxR))):
-            x,y = int(round(point1[0] + r*np.cos(fi))),int(round(point1[1] + r*np.sin(fi)))
+            x,y = int(round(point1[0] + r*cosFi)),int(round(point1[1] + r*sinFi))
             cost = cost + TerrainHandler.getPointHeight(x,y) # TerrainHandler.getPointAccessibility(x,y)   #temporary removed
         return cost
 
