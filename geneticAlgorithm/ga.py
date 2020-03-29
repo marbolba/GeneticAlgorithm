@@ -1,4 +1,5 @@
 import sys
+import time
 
 from geneticAlgorithm.population import Population
 from problem.abstractProblem import Problem
@@ -17,12 +18,14 @@ class Ga:
         self.problem: Problem = None
 
     def startAlgorithm(self):
+        start_time = time.time()
         for generationId in range(self.setting.generationsNumber()):
-            print("\nGeneration {}".format(generationId))
+            print("\nGeneration {0}, in time {1:.2f} seconds".format(generationId,time.time()-start_time))
             # raports
             reportPopulationAverage(self.population)
             reportBestIndividual(self.population)
 
+            start_time = time.time()
             newPopulation = self.population.reproduction()
             self.population.succession(newPopulation)
             self.population.crossover()
