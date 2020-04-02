@@ -58,6 +58,10 @@ class TerrainHandler:
     @staticmethod
     def setName(folderName):
         TerrainHandler.folderPath = "assets/terrains/{}/".format(folderName)
+        TerrainHandler.fetchAssets(folderName)
+
+    @staticmethod
+    def fetchAssets(folderName):
         TerrainHandler.terrain = TerrainHandler.readFromFile("assets/terrains/{}/terrain.npy".format(folderName))
         TerrainHandler.accessibility = TerrainHandler.readFromFile("assets/terrains/{}/accessibility.npy".format(folderName))
         TerrainHandler.domain = TerrainHandler.readFromFile("assets/terrains/{}/terrain-size.npy".format(folderName))
