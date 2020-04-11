@@ -2,12 +2,14 @@ import copy
 from random import normalvariate
 
 import numpy as np
+import time
 
 from geneticAlgorithm.genotype.abstractGenotype import Genotype
 from geneticAlgorithm.individual import Individual
 from geneticAlgorithm.operations.abstractOperation import Operation
 from geneticAlgorithm.population import Population
 from settings.abstractSettings import Setting
+from tools.timeFoo import timeFoo
 
 
 class DecimalOperation(Operation):
@@ -72,22 +74,21 @@ class DecimalOperation(Operation):
     @staticmethod
     def mutation(population: [Individual], setting: Setting):
         for indiv in population:
-            for geneIdx in range(indiv.genotype.length):
-                if np.random.rand() <= setting.mutationProbability():
-                    # np.random.rand()
-                    tmpGenotype = indiv.genotype.genotype.copy()
-                    # print("MUT 1/2",tmpGenotype[geneIdx])
-                    # do rozkladu normalnego
-                    mu = tmpGenotype[geneIdx]
-                    sigma = 1
-                    x = round(normalvariate(mu, sigma))
-                    # check if is in bounds
-                    if (
-                        x < setting.genotypeInfo().parametersDomain[geneIdx][0]
-                        or x > setting.genotypeInfo().parametersDomain[geneIdx][1]
-                    ):
-                        tmpGenotype[geneIdx] = tmpGenotype[geneIdx]  # no change
-                    else:
-                        tmpGenotype[geneIdx] = x
-                    # print("MUT 2/2", tmpGenotype[geneIdx])
-                    indiv.setGenotype(tmpGenotype.copy())
+            p = np.random.rand(indiv.genotype.length)
+            mutateGeneIndicles = [i for i,v in enumerate(p) if v <= setting.mutationProbability()]
+            genotype = indiv.genotype.genotype
+
+            for geneIdx in mutateGeneIndicles:
+                # print("MUT 1/2",genotype[geneIdx])
+                # do rozkladu normalnego
+                mu = genotype[geneIdx]
+                sigma = 1
+                x = round(normalvariate(mu, sigma))
+                # check if is in bounds
+                if (
+                    x >= setting.genotypeInfo().parametersDomain[geneIdx][0]
+                    and x <= setting.genotypeInfo().parametersDomain[geneIdx][1]
+                ):
+                    indiv.setGene(geneIdx,x)
+                # print("MUT 2/2", genotype[geneIdx])
+            indiv.refresh()
