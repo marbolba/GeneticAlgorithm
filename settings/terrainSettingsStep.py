@@ -41,7 +41,7 @@ class TerrainGenotypeInfo(GenotypeInfo):
         return domain
 
 
-class TerrainSetting(Setting):
+class TerrainSettingStep(Setting):
     def __init__(self):
         self.terrainGenotypeInfo: TerrainGenotypeInfo = TerrainGenotypeInfo()
 
