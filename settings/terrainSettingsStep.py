@@ -20,11 +20,26 @@ class TerrainGenotypeInfo(GenotypeInfo):
         self.succession = DecimalOperation.eliteSuccession
         self.crossover = DecimalOperation.singlePointCrossover
         self.mutation = DecimalOperation.mutation
-        
-        # terrain basic
-        self.parameters = 6
+
+        # terrain step
+        self.parameters = 41
         self.parametersWordLength = list(1 for i in range(0, self.parameters))
-        self.parametersDomain = list((0, TerrainGenotypeInfo.size[i % 2] - 1) for i in range(0, int(self.parameters)))
+        self.parametersDomain = self.domainsForStep()
+        # terrain basic
+        # self.parameters = 6
+        # self.parametersWordLength = list(1 for i in range(0, self.parameters))
+        # self.parametersDomain = list((0, TerrainGenotypeInfo.size[i % 2] - 1) for i in range(0, int(self.parameters)))
+    
+    def domainsForStep(self):
+        #settings
+        maxStepsNr = 40
+        
+        domain = []
+        domain.append((0,maxStepsNr))
+        for _ in range(0, maxStepsNr):
+            domain.append((0, 2*np.pi))
+        return domain
+
 
 class TerrainSetting(Setting):
     def __init__(self):
