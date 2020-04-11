@@ -2,6 +2,7 @@ from geneticAlgorithm.genotype.abstractGenotype import Genotype
 from geneticAlgorithm.individual import Individual
 from geneticAlgorithm.population import Population
 from settings.abstractSettings import Setting
+import random
 
 
 class Operation:
@@ -24,18 +25,15 @@ class Operation:
 
     @staticmethod
     def eliteSuccession(population: Population, newPopulation: [Individual]):
-        sortedIndividuals = sorted(
-            population.population, key=lambda x: x._adaptation, reverse=True
-        )
-        newPopulation[0] = sortedIndividuals[0]
-        newPopulation[3] = sortedIndividuals[1]
-        newPopulation[5] = sortedIndividuals[2]
-        newPopulation[7] = sortedIndividuals[3]
-        newPopulation[9] = sortedIndividuals[4]
-        newPopulation[11] = sortedIndividuals[5]
-        newPopulation[13] = sortedIndividuals[6]
-        newPopulation[15] = sortedIndividuals[7]
-        newPopulation[17] = sortedIndividuals[8]
-        newPopulation[19] = sortedIndividuals[9]
-        newPopulation[21] = sortedIndividuals[10]
-        population.setPopulation(newPopulation)
+        # settings parameters:
+        g = 0.3 # percent of old population elite
+        sortedOldPopulation = sorted(population.population, key=lambda x: x._adaptation, reverse=True)
+        sortedNewPopulation = sorted(newPopulation, key=lambda x: x._adaptation, reverse=True)
+        finalPopulationSize = len(sortedOldPopulation)
+        
+        for i in range(0,int(g*finalPopulationSize)):
+            # print(sortedNewPopulation[finalPopulationSize-1-i]._adaptation,"for", sortedOldPopulation[i]._adaptation)
+            sortedNewPopulation[finalPopulationSize-1-i] = sortedOldPopulation[i] #exchange worst new for best old 
+
+        random.shuffle(sortedNewPopulation)
+        population.setPopulation(sortedNewPopulation)
