@@ -23,8 +23,18 @@ class Individual:
         self._setting = setting
 
     def setGenotype(self, genotype: []):
-        self.genotype.genotype = copy.deepcopy(genotype)
+        self.genotype.genotype = genotype
+        self._values = self.genotype.calculateValue()
+        self._calculateFenotype()
+        self._calculateAdaptation()
 
+    def setGene(self,geneIdx,gene):
+        if(geneIdx<len(self.genotype.genotype)):
+            self.genotype.genotype[geneIdx] = gene
+        else:
+            print("ERR: setting gene failed")
+    
+    def refresh(self):
         self._values = self.genotype.calculateValue()
         self._calculateFenotype()
         self._calculateAdaptation()
