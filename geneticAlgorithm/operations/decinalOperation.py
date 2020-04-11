@@ -80,7 +80,7 @@ class DecimalOperation(Operation):
                     # do rozkladu normalnego
                     mu = tmpGenotype[geneIdx]
                     sigma = 1
-                    x = int(round(normalvariate(mu, sigma)))
+                    x = round(normalvariate(mu, sigma))
                     # check if is in bounds
                     if (
                         x < setting.genotypeInfo().parametersDomain[geneIdx][0]

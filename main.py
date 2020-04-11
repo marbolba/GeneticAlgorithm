@@ -1,5 +1,6 @@
 from geneticAlgorithm.ga import Ga
 from problem.terrainProblem import TerrainProblem
+from problem.terrainProblemStep import TerrainProblemStep
 from problem.x2Problem import X2Problem
 from settings.terrainSettings import TerrainSetting
 from settings.x2Setting import X2Setting
@@ -17,7 +18,7 @@ def runForX2():
 def runForTerrain():
     ga = Ga()
     ga.setSetting(TerrainSetting())
-    ga.setProblem(TerrainProblem())
+    ga.setProblem(TerrainProblemStep())
     ga.initPopulation()
 
     ga.startAlgorithm()

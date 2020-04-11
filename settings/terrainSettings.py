@@ -9,7 +9,7 @@ from tools.terrainHandler import TerrainHandler
 
 
 class TerrainGenotypeInfo(GenotypeInfo):
-    TerrainHandler.setName("12-mar-2020_010731")
+    TerrainHandler.setName("04-kwi-2020_172920")
     size = TerrainHandler.getSize()
 
     def __init__(self):
@@ -21,9 +21,26 @@ class TerrainGenotypeInfo(GenotypeInfo):
         self.crossover = DecimalOperation.singlePointCrossover
         self.mutation = DecimalOperation.mutation
 
-        self.parameters = 12
+        # terrain step
+        self.parameters = 21
         self.parametersWordLength = list(1 for i in range(0, self.parameters))
-        self.parametersDomain = list((0, TerrainGenotypeInfo.size[i % 2] - 1) for i in range(0, int(self.parameters)))
+        self.parametersDomain = self.domainsForStep()
+        # terrain basic
+        # self.parameters = 6
+        # self.parametersWordLength = list(1 for i in range(0, self.parameters))
+        # self.parametersDomain = list((0, TerrainGenotypeInfo.size[i % 2] - 1) for i in range(0, int(self.parameters)))
+    
+    def domainsForStep(self):
+        #settings
+        maxStepsNr = 10
+        maxStepLength = 15
+        
+        domain = []
+        domain.append((0,maxStepsNr))
+        for _ in range(0, maxStepsNr):
+            domain.append((0, 2*np.pi))
+            domain.append((0,maxStepLength))
+        return domain
 
 
 class TerrainSetting(Setting):
@@ -37,7 +54,7 @@ class TerrainSetting(Setting):
         return 300
 
     def mutationProbability(self):
-        return 0.7
+        return 0.5
 
     def crossoverProbability(self):
         return 0.5

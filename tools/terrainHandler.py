@@ -46,14 +46,25 @@ class TerrainHandler:
     @staticmethod
     def travelCost(point1, point2):
         cost = 0
+        size = TerrainHandler.getSize()
         fi = math.atan2(point2[1]-point1[1],point2[0]-point1[0])
         maxR = TerrainHandler.distance(point1,point2)
         sinFi = np.sin(fi)
         cosFi = np.cos(fi)
         for r in range(1,int(round(maxR))):
             x,y = int(round(point1[0] + r*cosFi)),int(round(point1[1] + r*sinFi))
-            cost = cost + TerrainHandler.getPointHeight(x,y) # TerrainHandler.getPointAccessibility(x,y)   #temporary removed
+            if(x<size[0] and x>=0 and y<size[1] and y>=0):
+                cost = cost + TerrainHandler.getPointHeight(x,y) # TerrainHandler.getPointAccessibility(x,y)   #temporary removed
+            else:
+                cost = cost + 99999 # punish 
         return cost
+    
+    @staticmethod
+    def getNextStepPosition(position,fi,r):
+        sinFi = np.sin(fi)
+        cosFi = np.cos(fi)
+        x,y = int(round(position[0] + r*cosFi)),-1*int(round(position[1] + r*sinFi))
+        return (x,y)
 
     @staticmethod
     def setName(folderName):
