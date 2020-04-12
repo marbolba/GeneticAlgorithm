@@ -9,7 +9,7 @@ from tools.terrainHandler import TerrainHandler
 
 
 class TerrainGenotypeInfo(GenotypeInfo):
-    TerrainHandler.setName("11-kwi-2020_202841")
+    TerrainHandler.setName("12-kwi-2020_170728")
     size = TerrainHandler.getSize()
 
     def __init__(self):
@@ -22,17 +22,13 @@ class TerrainGenotypeInfo(GenotypeInfo):
         self.mutation = DecimalOperation.mutation
 
         # terrain step
-        self.parameters = 41
+        self.parameters = 31
         self.parametersWordLength = list(1 for i in range(0, self.parameters))
         self.parametersDomain = self.domainsForStep()
-        # terrain basic
-        # self.parameters = 6
-        # self.parametersWordLength = list(1 for i in range(0, self.parameters))
-        # self.parametersDomain = list((0, TerrainGenotypeInfo.size[i % 2] - 1) for i in range(0, int(self.parameters)))
     
     def domainsForStep(self):
         #settings
-        maxStepsNr = 40
+        maxStepsNr = 30
         
         domain = []
         domain.append((0,maxStepsNr))
