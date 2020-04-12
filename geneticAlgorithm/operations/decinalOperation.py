@@ -38,57 +38,45 @@ class DecimalOperation(Operation):
 
     # CROSSOVER
     @staticmethod
-    def singlePointCrossover(
-        population: [Individual], setting: Setting
-    ):  ##this is averaging crossover
-        for i in range(0, len(population), 2):
+    def singlePointCrossover(population: [Individual], setting: Setting):
+        sizeOfPopulation = len(population)
+        genotypeLength = len(population[0].genotype.genotype)
+        for i in range(0, sizeOfPopulation, 2):
             # guard block
-            if not i + 1 < len(population):
-                print(
-                    "ERR: cannot perform crossover (index out of bound {}".format(i + 1)
-                )
+            if not i + 1 < sizeOfPopulation:
+                print('ERR: cannot perform crossover (index out of bound {}'.format(i + 1))
 
-            if setting.crossoverProbability() <= np.random.rand():
-                tmpGenotype1 = population[i].genotype.genotype.copy()  # ???
-                tmpGenotype2 = population[i + 1].genotype.genotype.copy()  # ???
-                # randomly select in-between point
-                for gen in range(population[i].genotype.length):
-                    diff = (
-                        population[i + 1].genotype.genotype[gen]
-                        - population[i].genotype.genotype[gen]
-                    )
-                    if diff == 0:
-                        cutPoint = 0
-                    elif diff > 0:
-                        cutPoint = np.random.randint(0, diff + 1)
-                    else:
-                        cutPoint = np.random.randint(diff, 0 + 1)
-                    # print('cx:(',gen,')', tmpGenotype1, '&', tmpGenotype2,'in', cutPoint)
-                    tmpGenotype1[gen] = tmpGenotype1[gen] + cutPoint
-                    tmpGenotype2[gen] = tmpGenotype2[gen] - cutPoint
-                    # print('ax:(',gen,')', tmpGenotype1, '&', tmpGenotype2, 'in', cutPoint)
-                population[i].setGenotype(tmpGenotype1.copy())  # ???
-                population[i + 1].setGenotype(tmpGenotype2.copy())  # ???
+            if np.random.rand() <= setting.crossoverProbability():
+                tmpGenotype1 = population[i].genotype.genotype  # ???
+                tmpGenotype2 = population[i + 1].genotype.genotype  # ???
+                # randomly select cut point
+                cutPoint = np.random.randint(1, genotypeLength)
+                # print('cx:', population[i].genotype.genotype, '&', population[i + 1].genotype.genotype, 'in', cutPoint)
+                for j in range(cutPoint, genotypeLength):
+                    tmpGenotype1[j], tmpGenotype2[j] = tmpGenotype2[j], tmpGenotype1[j]
+                population[i].setGenotype(tmpGenotype1)  # ???
+                population[i + 1].setGenotype(tmpGenotype2)  # ???
+                # print('ax:', population[i].genotype.genotype, '&', population[i + 1].genotype.genotype, 'in', cutPoint)
+
 
     # MUTATION
     @staticmethod
     def mutation(population: [Individual], setting: Setting):
-        for indiv in population:
-            p = np.random.rand(indiv.genotype.length)
+        for individual in population:
+            p = np.random.rand(individual.genotype.length)
             mutateGeneIndicles = [i for i,v in enumerate(p) if v <= setting.mutationProbability()]
-            genotype = indiv.genotype.genotype
+            genotype = individual.genotype.genotype
 
             for geneIdx in mutateGeneIndicles:
                 # print("MUT 1/2",genotype[geneIdx])
-                # do rozkladu normalnego
                 mu = genotype[geneIdx]
                 sigma = 1
-                x = round(normalvariate(mu, sigma))
+                x = float("{:.2f}".format(normalvariate(mu, sigma)))
                 # check if is in bounds
                 if (
                     x >= setting.genotypeInfo().parametersDomain[geneIdx][0]
                     and x <= setting.genotypeInfo().parametersDomain[geneIdx][1]
                 ):
-                    indiv.setGene(geneIdx,x)
+                    individual.setGene(geneIdx,x)
                 # print("MUT 2/2", genotype[geneIdx])
-            indiv.refresh()
+            individual.refresh()
