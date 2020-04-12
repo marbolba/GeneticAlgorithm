@@ -11,7 +11,7 @@ class TerrainProblemStep(Problem):
         points = []
         currentPosition = (0,0)
         # print(values)
-        for i in range(1,values[0]+1):
+        for i in range(1,round(values[0]+1)):
             fi = values[i]
             currentPosition = TerrainHandler.getNextStepPosition(currentPosition,fi,5)
             points.append(currentPosition)
