@@ -7,7 +7,7 @@ from tools.terrainHandler import TerrainHandler
 def reportBestIndividual(population: Population):
     sortedIndividuals = sorted(population.population, key=lambda x: x._adaptation, reverse=True)
     print(
-        "Best individual: genome: {} value {} adaptation: {} ".format(
+        "Best individual: \n- genome: {} \n- value {} \n- adaptation: {} ".format(
             sortedIndividuals[0].genotype.toString(),
             sortedIndividuals[0].getValue(),
             sortedIndividuals[0].getAdaptation(),
