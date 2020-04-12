@@ -9,6 +9,7 @@ from report.reporter import (
     reportOutputPath,
 )
 from settings.abstractSettings import Setting
+from tools.timeFoo import timeFoo
 
 
 class Ga:
@@ -17,6 +18,7 @@ class Ga:
         self.setting: Setting = None
         self.problem: Problem = None
 
+    @timeFoo
     def startAlgorithm(self):
         start_time = time.time()
         for generationId in range(self.setting.generationsNumber()):
