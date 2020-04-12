@@ -16,24 +16,13 @@ class DecimalGenotype(Genotype):
 
         # binary genotype
         for i in range(self.length):
-            self.genotype.append(
-                np.random.randint(
-                    self.genotypeInfo.parametersDomain[i][0],
-                    self.genotypeInfo.parametersDomain[i][1] + 1,
-                )
-            )  # decimal, customizable
+            rg = self.genotypeInfo.parametersDomain[i][1] - self.genotypeInfo.parametersDomain[i][0]
+            randVal = self.genotypeInfo.parametersDomain[i][0] + np.random.rand()*rg
+            self.genotype.append(float("{:.2f}".format(randVal)))  # decimal, customizable
         print("Genotype: ", self.toString())
 
-    # TODO make this prettier
     def toString(self):
-        return int("".join([str(elem) for elem in self.genotype]))
+        return "".join([str(elem)+"|" for elem in self.genotype])
 
     def calculateValue(self):
-        values = []
-        for i in range(0, self.genotypeInfo.parameters):
-            startIdx = np.sum(self.genotypeInfo.parametersWordLength[0:i])
-            parameterGenotype = self.getPartOfGenotype(
-                int(startIdx), int(startIdx + self.genotypeInfo.parametersWordLength[i])
-            )
-            values.append(parameterGenotype[0])
-        return values
+        return self.genotype
