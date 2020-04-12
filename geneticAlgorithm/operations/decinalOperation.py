@@ -70,13 +70,15 @@ class DecimalOperation(Operation):
             for geneIdx in mutateGeneIndicles:
                 # print("MUT 1/2",genotype[geneIdx])
                 mu = genotype[geneIdx]
-                sigma = 1
-                x = float("{:.2f}".format(normalvariate(mu, sigma)))
-                # check if is in bounds
-                if (
-                    x >= setting.genotypeInfo().parametersDomain[geneIdx][0]
-                    and x <= setting.genotypeInfo().parametersDomain[geneIdx][1]
-                ):
-                    individual.setGene(geneIdx,x)
+                sigma = 50
+                while True: # do while loop emulation
+                    x = float("{:.2f}".format(normalvariate(mu, sigma)))
+                    # check if is in bounds
+                    if (
+                        x >= setting.genotypeInfo().parametersDomain[geneIdx][0]
+                        and x <= setting.genotypeInfo().parametersDomain[geneIdx][1]
+                    ):
+                        individual.setGene(geneIdx,x)
+                        break
                 # print("MUT 2/2", genotype[geneIdx])
             individual.refresh()
