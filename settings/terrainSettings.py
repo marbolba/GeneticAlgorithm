@@ -19,16 +19,17 @@ class TerrainGenotypeInfo(GenotypeInfo):
         self.mutation = DecimalOperation.mutation
         
         # terrain basic
-        self.parameters = 6
+        maxStepsNr = 5
+        self.parameters = 2*maxStepsNr
         self.parametersWordLength = list(1 for i in range(0, self.parameters))
-        self.parametersDomain = list((0, TerrainGenotypeInfo.size[i % 2] - 1) for i in range(0, int(self.parameters)))
+        self.parametersDomain = list((0, TerrainHandler.getSize()[i % 2] - 1) for i in range(0, int(self.parameters)))
 
 class TerrainSetting(Setting):
     def __init__(self):
         self.terrainGenotypeInfo: TerrainGenotypeInfo = TerrainGenotypeInfo()
 
     def generationsNumber(self):
-        return 50
+        return 30
 
     def populationSize(self):
         return 200
