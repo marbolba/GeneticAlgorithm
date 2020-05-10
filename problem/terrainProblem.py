@@ -13,13 +13,15 @@ class TerrainProblem(Problem):
             points.append([values[i], values[i + 1]])
         return points
 
+
     def adaptationFunction(self, values: []):
+        costFunction = lambda x: 187.5*(pow(1.028,x*100))
         # settings
         startPoint = [0, 0]
         endPoint = [200,20]
 
         distanceMax = TerrainHandler.distance(startPoint, endPoint)
-        costMax = 3000
+        costMax = 1500
 
         # sprawdzenie czy sa punkty do przejscia
         if(len(values)<1):
@@ -34,6 +36,6 @@ class TerrainProblem(Problem):
         for i in range(0, len(values) - 1):
             cost = cost + TerrainHandler.travelCost(values[i], values[i + 1])
 
-        # print("distanceElement:",distanceElement,", cost of travel: ", cost,"adaptation",1000*(distanceMax - distanceElement)/distanceMax + 1000*(costMax-cost)/costMax)
-        adaptationVal = 8000 * (distanceMax - distanceElement) / distanceMax + 3000 * (costMax - cost) / costMax
+        adaptationVal = 5000 * (distanceMax - distanceElement) / distanceMax + costFunction((costMax - cost) / costMax)
+        # print("distanceElement:",(distanceMax - distanceElement) / distanceMax*100,"%, cost of travel: ", (costMax - cost) /costMax*100,"% adaptation",adaptationVal)
         return adaptationVal if adaptationVal > 0 else 0
