@@ -4,7 +4,7 @@ from geneticAlgorithm.population import Population
 from tools.terrainHandler import TerrainHandler
 
 
-def reportBestIndividual(population: Population):
+def reportBestIndividual(population: Population,generationNr:int):
     sortedIndividuals = sorted(population.population, key=lambda x: x._adaptation, reverse=True)
     print(
         "Best individual: \n- genome: {} \n- value {} \n- adaptation: {} ".format(
@@ -13,11 +13,11 @@ def reportBestIndividual(population: Population):
             sortedIndividuals[0].getAdaptation(),
         )
     )  # tmp without indiv object
+    TerrainHandler.drawTerrainWithPoints(sortedIndividuals[0].getFenotype(),generationNr)
 
 
 def reportAllIndividuals(population: Population):
     print(list(map(lambda indiv: (population.genotype.toString(), population.getAdaptation(),), population.population)))
-
 
 def reportPopulationAverage(population: Population):
     adaptationAvg = np.average(list(map(lambda indiv: indiv.getAdaptation(), population.population)))
@@ -27,4 +27,4 @@ def reportPopulationAverage(population: Population):
 def reportOutputPath(population: Population):
     sortedIndividuals = sorted(population.population, key=lambda x: x._adaptation, reverse=True)
     values = sortedIndividuals[0].getFenotype()
-    TerrainHandler.drawTerrainWithPoints(values)
+    TerrainHandler.drawFinalRaport(values)

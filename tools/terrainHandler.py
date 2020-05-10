@@ -16,10 +16,10 @@ class TerrainHandler:
         return np.load(fileName)
 
     @staticmethod
-    def checkIfFolderExists():
-        if not (os.path.exists(TerrainHandler.folderPath)):
+    def checkIfFolderExists(folderPath):
+        if not (os.path.exists(folderPath)):
             # create the directory you want to save to
-            os.mkdir(TerrainHandler.folderPath)
+            os.mkdir(folderPath)
 
     @staticmethod
     def slope(point1, point2):
@@ -54,9 +54,9 @@ class TerrainHandler:
         for r in range(1,int(round(maxR)+1)):
             x,y = int(round(point1[0] + r*cosFi)),int(round(point1[1] + r*sinFi))
             if(x<size[0] and x>=0 and y<size[1] and y>=0):
-                cost = cost + TerrainHandler.getPointHeight(x,y) # TerrainHandler.getPointAccessibility(x,y)   #temporary removed
+                cost = cost + pow(TerrainHandler.getPointHeight(x,y),3) # TerrainHandler.getPointAccessibility(x,y)   #temporary removed
             else:
-                cost = cost + 100 # punish 
+                cost = cost + 1000 # punish 
         return cost
     
     @staticmethod
@@ -78,7 +78,8 @@ class TerrainHandler:
         TerrainHandler.domain = TerrainHandler.readFromFile("assets/terrains/{}/terrain-size.npy".format(folderName))
 
     @staticmethod
-    def drawTerrainWithPoints(points: [int]):
+    def drawTerrainWithPoints(points: [int],generationNr:int):
+        historyFolder = f"{TerrainHandler.folderPath}history/"
         # terrain
         plt.matshow(TerrainHandler.terrain)
         plt.colorbar()
@@ -86,7 +87,23 @@ class TerrainHandler:
         # points
         items = np.transpose([list(item) for item in points])
         plt.plot(items[0], items[1], "xr-")
-        TerrainHandler.checkIfFolderExists()
+        TerrainHandler.checkIfFolderExists(historyFolder)
+        plt.savefig(f"{historyFolder}generation-{generationNr}.png")
+
+        plt.show(block=False)
+        plt.pause(0.3)
+        plt.close()
+
+    @staticmethod
+    def drawFinalRaport(points: [int]):
+        # terrain
+        plt.matshow(TerrainHandler.terrain)
+        plt.colorbar()
+
+        # points
+        items = np.transpose([list(item) for item in points])
+        plt.plot(items[0], items[1], "xr-")
+        TerrainHandler.checkIfFolderExists(TerrainHandler.folderPath)
         plt.savefig("{}result-2d.png".format(TerrainHandler.folderPath))
 
         plt.show()

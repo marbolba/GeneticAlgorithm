@@ -25,7 +25,7 @@ class Ga:
             print("\nGeneration {0}, in time {1:.2f} seconds".format(generationId,time.time()-start_time))
             # raports
             reportPopulationAverage(self.population)
-            reportBestIndividual(self.population)
+            reportBestIndividual(self.population,generationId)
 
             start_time = time.time()
             newPopulation = self.population.reproduction()
