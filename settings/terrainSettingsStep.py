@@ -44,7 +44,7 @@ class TerrainSettingStep(Setting):
         return 70
 
     def populationSize(self):
-        return 200
+        return 50
 
     def mutationProbability(self):
         return 0.1
