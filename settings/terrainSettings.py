@@ -9,9 +9,6 @@ from tools.terrainHandler import TerrainHandler
 
 
 class TerrainGenotypeInfo(GenotypeInfo):
-    TerrainHandler.setName("11-kwi-2020_202841")
-    size = TerrainHandler.getSize()
-
     def __init__(self):
 
         self.type = DecimalGenotype

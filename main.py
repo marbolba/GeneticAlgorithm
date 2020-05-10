@@ -5,6 +5,7 @@ from problem.x2Problem import X2Problem
 from settings.terrainSettings import TerrainSetting
 from settings.terrainSettingsStep import TerrainSettingStep
 from settings.x2Setting import X2Setting
+from tools.terrainHandler import TerrainHandler
 
 
 def runForX2():
@@ -34,4 +35,5 @@ def runForTerrainStep():
 
 
 if __name__ == "__main__":
-    runForTerrainStep()
+    TerrainHandler.setName("case2")
+    runForTerrain()
