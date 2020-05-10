@@ -37,7 +37,11 @@ class TerrainHandler:
 
     @staticmethod
     def getPointHeight(x, y):
-        return TerrainHandler.terrain[y][x]
+        size = TerrainHandler.getSize()
+        if(x<size[0] and x>=0 and y<size[1] and y>=0):
+            return TerrainHandler.terrain[y][x]
+        else:
+            return 0
     
     @staticmethod
     def getPointAccessibility(x, y):
@@ -58,7 +62,7 @@ class TerrainHandler:
             x,y = int(round(point1[0] + r*cosFi)),int(round(point1[1] + r*sinFi))
             if(x<size[0] and x>=0 and y<size[1] and y>=0):
                 # print(":",x,y,TerrainHandler.getPointHeight(x,y),previousHeight,"=",stepLength + abs(TerrainHandler.getPointHeight(x,y)-previousHeight)*5)
-                cost = cost + stepLength + abs(TerrainHandler.getPointHeight(x,y)-previousHeight)*5 # TerrainHandler.getPointAccessibility(x,y)   #temporary removed
+                cost = cost + stepLength + abs(TerrainHandler.getPointHeight(x,y)-previousHeight)*15 # TerrainHandler.getPointAccessibility(x,y)   #temporary removed
                 previousHeight = TerrainHandler.getPointHeight(x,y)
             else:
                 cost = cost + 100 # punish 
