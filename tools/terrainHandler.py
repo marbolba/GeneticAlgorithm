@@ -45,18 +45,24 @@ class TerrainHandler:
 
     @staticmethod
     def travelCost(point1, point2):
-        cost = 0
         size = TerrainHandler.getSize()
         fi = math.atan2(point2[1]-point1[1],point2[0]-point1[0])
         maxR = TerrainHandler.distance(point1,point2)
         sinFi = np.sin(fi)
         cosFi = np.cos(fi)
-        for r in range(1,int(round(maxR)+1)):
+
+        stepLength = 1
+        cost = 0
+        previousHeight = TerrainHandler.getPointHeight(round(point1[0]),round(point1[1]))
+        for r in range(1,int(round(maxR)+1),stepLength):
             x,y = int(round(point1[0] + r*cosFi)),int(round(point1[1] + r*sinFi))
             if(x<size[0] and x>=0 and y<size[1] and y>=0):
-                cost = cost + pow(TerrainHandler.getPointHeight(x,y),3) # TerrainHandler.getPointAccessibility(x,y)   #temporary removed
+                # print(":",x,y,TerrainHandler.getPointHeight(x,y),previousHeight,"=",stepLength + abs(TerrainHandler.getPointHeight(x,y)-previousHeight)*5)
+                cost = cost + stepLength + abs(TerrainHandler.getPointHeight(x,y)-previousHeight)*5 # TerrainHandler.getPointAccessibility(x,y)   #temporary removed
+                previousHeight = TerrainHandler.getPointHeight(x,y)
             else:
-                cost = cost + 1000 # punish 
+                cost = cost + 100 # punish 
+        # print("cost",point1,point2," = ",cost)
         return cost
     
     @staticmethod
