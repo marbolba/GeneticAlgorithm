@@ -17,12 +17,16 @@ class TerrainGenotypeInfo(GenotypeInfo):
         self.succession = DecimalOperation.eliteSuccession
         self.crossover = DecimalOperation.singlePointCrossover
         self.mutation = DecimalOperation.mutation
-        
+
         # terrain basic
         maxStepsNr = 5
-        self.parameters = 2*maxStepsNr
+        self.parameters = 2 * maxStepsNr
         self.parametersWordLength = list(1 for i in range(0, self.parameters))
-        self.parametersDomain = list((0, TerrainHandler.getSize()[i % 2] - 1) for i in range(0, int(self.parameters)))
+        self.parametersDomain = list(
+            (0, TerrainHandler.getSize()[i % 2] - 1)
+            for i in range(0, int(self.parameters))
+        )
+
 
 class TerrainSetting(Setting):
     def __init__(self):

@@ -28,12 +28,12 @@ class Individual:
         self._calculateFenotype()
         self._calculateAdaptation()
 
-    def setGene(self,geneIdx,gene):
-        if(geneIdx<len(self.genotype.genotype)):
+    def setGene(self, geneIdx, gene):
+        if geneIdx < len(self.genotype.genotype):
             self.genotype.genotype[geneIdx] = gene
         else:
             print("ERR: setting gene failed")
-    
+
     def refresh(self):
         self._values = self.genotype.calculateValue()
         self._calculateFenotype()

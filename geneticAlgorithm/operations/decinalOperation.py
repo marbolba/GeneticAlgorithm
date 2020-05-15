@@ -44,7 +44,9 @@ class DecimalOperation(Operation):
         for i in range(0, sizeOfPopulation, 2):
             # guard block
             if not i + 1 < sizeOfPopulation:
-                print('ERR: cannot perform crossover (index out of bound {}'.format(i + 1))
+                print(
+                    "ERR: cannot perform crossover (index out of bound {}".format(i + 1)
+                )
 
             if np.random.rand() <= setting.crossoverProbability():
                 tmpGenotype1 = population[i].genotype.genotype  # ???
@@ -58,27 +60,28 @@ class DecimalOperation(Operation):
                 population[i + 1].setGenotype(tmpGenotype2)  # ???
                 # print('ax:', population[i].genotype.genotype, '&', population[i + 1].genotype.genotype, 'in', cutPoint)
 
-
     # MUTATION
     @staticmethod
     def mutation(population: [Individual], setting: Setting):
         for individual in population:
             p = np.random.rand(individual.genotype.length)
-            mutateGeneIndicles = [i for i,v in enumerate(p) if v <= setting.mutationProbability()]
+            mutateGeneIndicles = [
+                i for i, v in enumerate(p) if v <= setting.mutationProbability()
+            ]
             genotype = individual.genotype.genotype
 
             for geneIdx in mutateGeneIndicles:
                 # print("MUT 1/2",genotype[geneIdx])
                 mu = genotype[geneIdx]
                 sigma = 50
-                while True: # do while loop emulation
+                while True:  # do while loop emulation
                     x = float("{:.2f}".format(normalvariate(mu, sigma)))
                     # check if is in bounds
                     if (
                         x >= setting.genotypeInfo().parametersDomain[geneIdx][0]
                         and x <= setting.genotypeInfo().parametersDomain[geneIdx][1]
                     ):
-                        individual.setGene(geneIdx,x)
+                        individual.setGene(geneIdx, x)
                         break
                 # print("MUT 2/2", genotype[geneIdx])
             individual.refresh()

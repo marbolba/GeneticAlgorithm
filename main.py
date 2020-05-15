@@ -18,6 +18,7 @@ def runForX2():
 
     ga.startAlgorithm()
 
+
 def runForTerrainSel():
     ga = Ga()
     ga.setSetting(TerrainSettingSel())
@@ -35,6 +36,7 @@ def runForTerrain():
 
     ga.startAlgorithm()
 
+
 def runForTerrainStep():
     ga = Ga()
     ga.setSetting(TerrainSettingStep())
@@ -45,5 +47,5 @@ def runForTerrainStep():
 
 
 if __name__ == "__main__":
-    TerrainHandler.setName("case2")
-    runForTerrainSel()
+    TerrainHandler.setName("case1")
+    runForTerrainStep()
