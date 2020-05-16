@@ -3,11 +3,7 @@ import time
 
 from geneticAlgorithm.population import Population
 from problem.abstractProblem import Problem
-from report.reporter import (
-    reportPopulationAverage,
-    reportBestIndividual,
-    reportOutputPath,
-)
+from report.reporter import Reporter
 from settings.abstractSettings import Setting
 from tools.timeFoo import timeFoo
 
@@ -17,22 +13,25 @@ class Ga:
         self.population: Population = None
         self.setting: Setting = None
         self.problem: Problem = None
+        self.reporter: Reporter = Reporter()
 
     @timeFoo
     def startAlgorithm(self):
         start_time = time.time()
         for generationId in range(self.setting.generationsNumber()):
-            print("\nGeneration {0}, in time {1:.2f} seconds".format(generationId,time.time()-start_time))
+            print(
+                f"\nGeneration {generationId+1}, in time {(time.time()-start_time):.2f} seconds"
+            )
             # raports
-            reportPopulationAverage(self.population)
-            reportBestIndividual(self.population,generationId)
+            self.reporter.reportPopulationAverage(self.population, generationId)
+            self.reporter.reportBestIndividual(self.population, generationId)
 
             start_time = time.time()
             newPopulation = self.population.reproduction()
             self.population.succession(newPopulation)
             self.population.crossover()
             self.population.mutation()
-        reportOutputPath(self.population)
+        self.reporter.reportOutputPath(self.population)
 
     def initPopulation(self):
         # Guardian block

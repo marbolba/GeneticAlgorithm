@@ -41,7 +41,7 @@ class TerrainSettingStep(Setting):
         self.terrainGenotypeInfo: TerrainGenotypeInfo = TerrainGenotypeInfo()
 
     def generationsNumber(self):
-        return 20
+        return 5
 
     def populationSize(self):
         return 200
