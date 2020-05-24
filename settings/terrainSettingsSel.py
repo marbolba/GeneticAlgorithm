@@ -36,10 +36,10 @@ class TerrainSettingSel(Setting):
         return 30
 
     def populationSize(self):
-        return 200
+        return 100
 
     def mutationProbability(self):
-        return 0.1
+        return 0.05
 
     def crossoverProbability(self):
         return 0.5

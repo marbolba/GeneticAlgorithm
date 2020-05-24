@@ -68,7 +68,7 @@ class TerrainHandler:
                 cost = (
                     cost
                     + stepLength
-                    + abs(TerrainHandler.getPointHeight(x, y) - previousHeight) * 15
+                    + abs(TerrainHandler.getPointHeight(x, y) - previousHeight) * 80
                 )  # TerrainHandler.getPointAccessibility(x,y)   #temporary removed
                 previousHeight = TerrainHandler.getPointHeight(x, y)
             else:

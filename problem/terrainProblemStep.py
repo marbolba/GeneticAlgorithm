@@ -22,10 +22,10 @@ class TerrainProblemStep(Problem):
         costFunction = lambda x: 187.5 * (pow(1.028, x * 100))
         # settings
         startPoint = [0, 0]
-        endPoint = [200, 20]
+        endPoint = [100, 150]
 
         distanceMax = TerrainHandler.distance(startPoint, endPoint)
-        costMax = 1500
+        costMax = 10000
         # print(values)
 
         if len(values) > 0:
@@ -43,7 +43,6 @@ class TerrainProblemStep(Problem):
             adaptationVal = 5000 * (
                 distanceMax - distanceElement
             ) / distanceMax + costFunction((costMax - cost) / costMax)
-            # print("distanceElement:",(distanceMax - distanceElement) / distanceMax*100,"%, cost of travel: ", (costMax - cost) /costMax*100,"% adaptation",adaptationVal)
             return adaptationVal if adaptationVal > 0 else 0
         else:
             return 0

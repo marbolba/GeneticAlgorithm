@@ -19,7 +19,7 @@ class TerrainGenotypeInfo(GenotypeInfo):
         self.mutation = DecimalOperation.mutation
 
         # terrain basic
-        maxStepsNr = 5
+        maxStepsNr = 6
         self.parameters = 2 * maxStepsNr
         self.parametersWordLength = list(1 for i in range(0, self.parameters))
         self.parametersDomain = list(
@@ -33,13 +33,13 @@ class TerrainSetting(Setting):
         self.terrainGenotypeInfo: TerrainGenotypeInfo = TerrainGenotypeInfo()
 
     def generationsNumber(self):
-        return 30
+        return 50
 
     def populationSize(self):
-        return 200
+        return 100
 
     def mutationProbability(self):
-        return 0.1
+        return 0.05
 
     def crossoverProbability(self):
         return 0.5
