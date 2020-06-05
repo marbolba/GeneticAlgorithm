@@ -39,10 +39,10 @@ class TerrainSetting(Setting):
         return 100
 
     def mutationProbability(self):
-        return 0.05
+        return 0.1
 
     def crossoverProbability(self):
-        return 0.5
+        return 1 
 
     def genotypeInfo(self):
         return self.terrainGenotypeInfo

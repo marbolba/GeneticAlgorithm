@@ -22,16 +22,18 @@ class Ga:
             print(
                 f"\nGeneration {generationId+1}, in time {(time.time()-start_time):.2f} seconds"
             )
-            # raports
-            self.reporter.reportPopulationAverage(self.population, generationId)
-            self.reporter.reportBestIndividual(self.population, generationId)
-
             start_time = time.time()
             newPopulation = self.population.reproduction()
             self.population.succession(newPopulation)
             self.population.crossover()
             self.population.mutation()
-        self.reporter.reportOutputPath(self.population)
+
+            # stats
+            self.reporter.reportBestIndividual(self.population, generationId)
+            self.reporter.reportPopulationAverage(self.population, generationId)
+        
+        self.reporter.reportConvergence()
+        self.reporter.reportResults(self.population)
 
     def initPopulation(self):
         # Guardian block
