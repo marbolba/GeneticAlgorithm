@@ -19,19 +19,19 @@ def runForX2():
     ga.startAlgorithm()
 
 
-def runForTerrainSel():
+def runForTerrain():
     ga = Ga()
-    ga.setSetting(TerrainSettingSel())
-    ga.setProblem(TerrainProblemSel())
+    ga.setSetting(TerrainSetting())
+    ga.setProblem(TerrainProblem())
     ga.initPopulation()
 
     ga.startAlgorithm()
 
 
-def runForTerrain():
+def runForTerrainSel():
     ga = Ga()
-    ga.setSetting(TerrainSetting())
-    ga.setProblem(TerrainProblem())
+    ga.setSetting(TerrainSettingSel())
+    ga.setProblem(TerrainProblemSel())
     ga.initPopulation()
 
     ga.startAlgorithm()
@@ -48,4 +48,4 @@ def runForTerrainStep():
 
 if __name__ == "__main__":
     TerrainHandler.setName("case1")
-    runForTerrainSel()
+    runForTerrainStep()

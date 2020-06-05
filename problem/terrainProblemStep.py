@@ -22,7 +22,7 @@ class TerrainProblemStep(Problem):
         costFunction = lambda x: 187.5 * (pow(1.028, x * 100))
         # settings
         startPoint = [0, 0]
-        endPoint = [100, 150]
+        endPoint = [200, 20]
 
         distanceMax = TerrainHandler.distance(startPoint, endPoint)
         costMax = 10000

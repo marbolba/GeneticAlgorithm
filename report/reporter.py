@@ -4,10 +4,12 @@ import os
 from geneticAlgorithm.population import Population
 from tools.terrainHandler import TerrainHandler
 from geneticAlgorithm.individual import Individual
+from settings.abstractSettings import Setting
 
 
 class Reporter:
-    def __init__(self):
+    def __init__(self,setting: Setting):
+        self.settings = setting
         self.best = []
         self.avg = []
         self.online = 0
@@ -65,9 +67,9 @@ class Reporter:
         historyFolder = f"{TerrainHandler.getName()}{TerrainHandler.getResultId()}"
         with open(f"{historyFolder}result.txt", "w") as text_file:
             text_file.write(
-                "Generations nr: {} \n".format(settings.generationsNumber())
+                "Generations nr: {} \n".format(self.settings.generationsNumber())
             )
-            text_file.write("Population size: {} \n".format(settings.populationSize()))
+            text_file.write("Population size: {} \n".format(self.settings.populationSize()))
             text_file.write("Best individual: {} \n".format(bestIndividual.getFenotype()))
             text_file.write("Avg history: {} \n".format(self.avg))
             text_file.write("Best history: {} \n".format(self.best))

@@ -13,7 +13,7 @@ class Ga:
         self.population: Population = None
         self.setting: Setting = None
         self.problem: Problem = None
-        self.reporter: Reporter = Reporter()
+        self.reporter: Reporter = None
 
     @timeFoo
     def startAlgorithm(self):
@@ -51,3 +51,4 @@ class Ga:
 
     def setSetting(self, setting: Setting):
         self.setting = setting
+        self.reporter = Reporter(setting)
