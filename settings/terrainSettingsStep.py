@@ -50,7 +50,7 @@ class TerrainSettingStep(Setting):
         return 0.1
 
     def crossoverProbability(self):
-        return 1 
+        return 0.5
 
     def genotypeInfo(self):
         return self.terrainGenotypeInfo
