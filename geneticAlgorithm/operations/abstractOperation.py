@@ -3,12 +3,49 @@ from geneticAlgorithm.individual import Individual
 from geneticAlgorithm.population import Population
 from settings.abstractSettings import Setting
 import random
+import numpy as np
+import copy
 
 
 class Operation:
     @staticmethod
-    def rouletteReproduction(population: Population):
-        raise NotImplementedError("The method not implemented")
+    def rouletteReproduction(population: Population,k=None):
+        if(k is None):
+            k=len(population.population)
+        # creating select chance array
+        adaptationSum = 0
+        selectChance = []
+        for individual in population.population:
+            adaptationSum += individual.getAdaptation()
+        for individual in population.population:
+            selectChance.append(individual.getAdaptation() / adaptationSum)
+        selectChance = np.cumsum(selectChance)
+
+        # select new population
+        newPopulation = []
+        selected = np.random.rand(k)
+        for sel in selected:
+            for propIdx in range(len(selectChance)):
+                if sel <= selectChance[propIdx]:
+                    newPopulation.append(copy.deepcopy(population.population[propIdx]))
+                    break
+
+        # override with new population
+        return newPopulation
+
+    @staticmethod
+    def tournamentReproduction(population: Population,tournamentSize:int=3):
+        k=len(population.population)
+
+        # select new population
+        newPopulation = []
+        for _ in range(k):
+            aspirants = Operation.rouletteReproduction(population,k=tournamentSize)
+            sortedIndividuals = sorted(aspirants, key=lambda x: x._adaptation, reverse=True) 
+            newPopulation.append(copy.deepcopy(sortedIndividuals[0]))
+
+        # override with new population
+        return newPopulation
 
     @staticmethod
     def singlePointCrossover(population: [Individual], setting: Setting):
