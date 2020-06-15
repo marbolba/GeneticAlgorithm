@@ -51,7 +51,7 @@ class DecimalOperation(Operation):
             for geneIdx in mutateGeneIndicles:
                 # print("MUT 1/2",genotype[geneIdx])
                 mu = genotype[geneIdx]
-                sigma = 50
+                sigma = 10
                 while True:  # do while loop emulation
                     x = float("{:.2f}".format(normalvariate(mu, sigma)))
                     # check if is in bounds
