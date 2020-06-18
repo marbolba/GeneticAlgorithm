@@ -69,11 +69,11 @@ class TerrainHandler:
             x, y = int(round(point1[0] + r * cosFi)), int(round(point1[1] + r * sinFi))
             if x < size[0] and x >= 0 and y < size[1] and y >= 0:
                 # print(":",x,y,TerrainHandler.getPointHeight(x,y),previousHeight,"=",stepLength + abs(TerrainHandler.getPointHeight(x,y)-previousHeight)*5)
-                cost = (
-                    cost
-                    + stepLength
-                    + abs(TerrainHandler.getPointHeight(x, y) - previousHeight) * oneUpCost
-                )  # TerrainHandler.getPointAccessibility(x,y)   #temporary removed
+                cost = cost + (
+                    stepLength
+                    + abs(TerrainHandler.getPointHeight(x, y) - previousHeight)
+                    * oneUpCost
+                ) * TerrainHandler.getPointAccessibility(x, y)
                 previousHeight = TerrainHandler.getPointHeight(x, y)
             else:
                 cost = cost + 100  # punish
@@ -105,12 +105,16 @@ class TerrainHandler:
         TerrainHandler.terrain = TerrainHandler.readFromFile(
             "assets/terrains/{}/terrain.npy".format(folderName)
         )
-        TerrainHandler.accessibility = TerrainHandler.readFromFile(
-            "assets/terrains/{}/accessibility.npy".format(folderName)
-        )
         TerrainHandler.domain = TerrainHandler.readFromFile(
             "assets/terrains/{}/terrain-size.npy".format(folderName)
         )
+        try:
+            TerrainHandler.accessibility = TerrainHandler.readFromFile(
+                "assets/terrains/{}/accessibility.npy".format(folderName)
+            )
+        except IOError:
+            print("WARN: No accessibility mesh")
+            TerrainHandler.accessibility = np.ones(TerrainHandler.domain)
 
     @staticmethod
     def drawTerrainWithPoints(points: [int], generationNr: int):
@@ -141,10 +145,13 @@ class TerrainHandler:
     def drawFinalRaport(bestFenotype: [int], best: [int], avg: [int]):
         historyFolder = f"{TerrainHandler.folderPath}{TerrainHandler.resultId}"
         gs = gridspec.GridSpec(2, 4)
+        # terrain + accessibility
+        terrain = TerrainHandler.terrain * TerrainHandler.accessibility
+
         # terrain
         plt.figure(figsize=(17, 7))
         plt.subplot(gs[:, :3])
-        plt.matshow(TerrainHandler.terrain, fignum=0)
+        plt.matshow(terrain, fignum=0)
         cbar = plt.colorbar()
         cbar.set_label("Z", rotation=270)
 
