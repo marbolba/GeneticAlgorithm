@@ -52,6 +52,8 @@ class TerrainHandler:
 
     @staticmethod
     def travelCost(point1, point2):
+        oneUpCost = 80  # cost of traveling one point height
+
         size = TerrainHandler.getSize()
         fi = math.atan2(point2[1] - point1[1], point2[0] - point1[0])
         maxR = TerrainHandler.distance(point1, point2)
@@ -70,7 +72,7 @@ class TerrainHandler:
                 cost = (
                     cost
                     + stepLength
-                    + abs(TerrainHandler.getPointHeight(x, y) - previousHeight) * 80
+                    + abs(TerrainHandler.getPointHeight(x, y) - previousHeight) * oneUpCost
                 )  # TerrainHandler.getPointAccessibility(x,y)   #temporary removed
                 previousHeight = TerrainHandler.getPointHeight(x, y)
             else:
