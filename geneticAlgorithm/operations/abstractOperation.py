@@ -9,9 +9,9 @@ import copy
 
 class Operation:
     @staticmethod
-    def rouletteReproduction(population: Population,k=None):
-        if(k is None):
-            k=len(population.population)
+    def rouletteReproduction(population: Population, k=None):
+        if k is None:
+            k = len(population.population)
         # creating select chance array
         adaptationSum = 0
         selectChance = []
@@ -34,14 +34,16 @@ class Operation:
         return newPopulation
 
     @staticmethod
-    def tournamentReproduction(population: Population,tournamentSize:int=3):
-        k=len(population.population)
+    def tournamentReproduction(population: Population, tournamentSize: int = 3):
+        k = len(population.population)
 
         # select new population
         newPopulation = []
         for _ in range(k):
-            aspirants = Operation.rouletteReproduction(population,k=tournamentSize)
-            sortedIndividuals = sorted(aspirants, key=lambda x: x._adaptation, reverse=True) 
+            aspirants = Operation.rouletteReproduction(population, k=tournamentSize)
+            sortedIndividuals = sorted(
+                aspirants, key=lambda x: x._adaptation, reverse=True
+            )
             newPopulation.append(copy.deepcopy(sortedIndividuals[0]))
 
         # override with new population

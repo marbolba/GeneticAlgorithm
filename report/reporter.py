@@ -8,7 +8,7 @@ from settings.abstractSettings import Setting
 
 
 class Reporter:
-    def __init__(self,setting: Setting):
+    def __init__(self, setting: Setting):
         self.settings = setting
         self.best = []
         self.avg = []
@@ -69,14 +69,18 @@ class Reporter:
             text_file.write(
                 "Generations nr: {} \n".format(self.settings.generationsNumber())
             )
-            text_file.write("Population size: {} \n".format(self.settings.populationSize()))
-            text_file.write("Best individual: {} \n".format(bestIndividual.getFenotype()))
+            text_file.write(
+                "Population size: {} \n".format(self.settings.populationSize())
+            )
+            text_file.write(
+                "Best individual: {} \n".format(bestIndividual.getFenotype())
+            )
             text_file.write("Avg history: {} \n".format(self.avg))
             text_file.write("Best history: {} \n".format(self.best))
             text_file.write("Convergence online: {} \n".format(self.online))
             text_file.write("Convergence offline: {} \n".format(self.offline))
 
-    def reportOutputPath(self, bestIndividual:Individual):
+    def reportOutputPath(self, bestIndividual: Individual):
         bestFenotype = bestIndividual.getFenotype()
         TerrainHandler.drawFinalRaport(bestFenotype, self.best, self.avg)
 

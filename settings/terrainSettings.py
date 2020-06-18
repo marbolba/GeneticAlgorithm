@@ -13,13 +13,13 @@ class TerrainGenotypeInfo(GenotypeInfo):
 
         self.type = DecimalGenotype
 
-        self.reproduction = DecimalOperation.rouletteReproduction
+        self.reproduction = DecimalOperation.tournamentReproduction
         self.succession = DecimalOperation.eliteSuccession
         self.crossover = DecimalOperation.singlePointCrossover
         self.mutation = DecimalOperation.mutation
 
         # terrain basic
-        maxStepsNr = 6
+        maxStepsNr = 4
         self.parameters = 2 * maxStepsNr
         self.parametersWordLength = list(1 for i in range(0, self.parameters))
         self.parametersDomain = list(
@@ -33,7 +33,7 @@ class TerrainSetting(Setting):
         self.terrainGenotypeInfo: TerrainGenotypeInfo = TerrainGenotypeInfo()
 
     def generationsNumber(self):
-        return 50
+        return 30
 
     def populationSize(self):
         return 100

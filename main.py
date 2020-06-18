@@ -47,5 +47,5 @@ def runForTerrainStep():
 
 
 if __name__ == "__main__":
-    TerrainHandler.setName("case3")
-    runForTerrainStep()
+    TerrainHandler.setName("case1")
+    runForTerrain()

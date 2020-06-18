@@ -119,12 +119,14 @@ class TerrainHandler:
     @staticmethod
     def drawTerrainWithPoints(points: [int], generationNr: int):
         historyFolder = f"{TerrainHandler.folderPath}{TerrainHandler.resultId}"
+        # terrain + accessibility
+        terrain = TerrainHandler.terrain * TerrainHandler.accessibility
         # terrain
         plt.figure(figsize=(8, 4))
         plt.subplots_adjust(
             top=0.95, bottom=0.07, left=0.05, right=0.5, hspace=0.27, wspace=0.05
         )
-        plt.matshow(TerrainHandler.terrain, fignum=1)
+        plt.matshow(terrain, fignum=1)
         cbar = plt.colorbar()
         cbar.set_label("Z", rotation=270)
 

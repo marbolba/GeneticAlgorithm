@@ -31,7 +31,7 @@ class Ga:
             # stats
             self.reporter.reportBestIndividual(self.population, generationId)
             self.reporter.reportPopulationAverage(self.population, generationId)
-        
+
         self.reporter.reportConvergence()
         self.reporter.reportResults(self.population)
 

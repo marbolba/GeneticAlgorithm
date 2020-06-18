@@ -24,7 +24,7 @@ class DecimalGenotype(Genotype):
             self.genotype.append(
                 float("{:.2f}".format(randVal))
             )  # decimal, customizable
-        print("Genotype: ", self.toString())
+        # print("Genotype: ", self.toString())
 
     def toString(self):
         return "".join([str(elem) + "|" for elem in self.genotype])
