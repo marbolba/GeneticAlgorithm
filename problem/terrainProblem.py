@@ -16,8 +16,8 @@ class TerrainProblem(Problem):
     def adaptationFunction(self, values: []):
         costFunction = lambda x: 187.5 * (pow(1.028, x * 100))
         # settings
-        startPoint = [0, 0]
-        endPoint = [200, 20]
+        startPoint = TerrainHandler.getWaypoints()[0]
+        endPoint = TerrainHandler.getWaypoints()[1]
 
         distanceMax = TerrainHandler.distance(startPoint, endPoint)
         costMax = 10000
@@ -33,7 +33,7 @@ class TerrainProblem(Problem):
 
         # skladowa kosztu podróży
         cost = 0
-        values.insert(0, [0, 0])
+        values.insert(0, startPoint)
         for i in range(0, len(values) - 1):
             cost = cost + TerrainHandler.travelCost(values[i], values[i + 1])
 
