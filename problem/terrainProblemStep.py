@@ -7,7 +7,7 @@ from scipy.spatial import distance
 
 
 class TerrainProblemStep(Problem):
-    def goalFunction(self, values):
+    def fenotypeFunction(self, values):
         points = []
         currentPosition = (0, 0)
 

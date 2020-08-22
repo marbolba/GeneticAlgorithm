@@ -4,7 +4,7 @@ from problem.abstractProblem import Problem
 
 
 class X2Problem(Problem):
-    def goalFunction(self, values):
+    def fenotypeFunction(self, values):
         return np.power(values, 2)
 
     def adaptationFunction(self, values):

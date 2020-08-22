@@ -51,7 +51,7 @@ class Individual:
 
     # calculates fenotype value
     def _calculateFenotype(self):
-        self._fenotype = self._problem.goalFunction(self._values)
+        self._fenotype = self._problem.fenotypeFunction(self._values)
 
     # sets adaptation function value for individual
     def _calculateAdaptation(self):

@@ -7,7 +7,7 @@ from scipy.spatial import distance
 
 
 class TerrainProblemSel(Problem):
-    def goalFunction(self, values):
+    def fenotypeFunction(self, values):
         points = []
         for i in range(1, round(values[0]) * 2 + 1, 2):
             points.append([values[i], values[i + 1]])
