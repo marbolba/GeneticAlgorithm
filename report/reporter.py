@@ -16,19 +16,20 @@ class Reporter:
         self.offline = 0
 
     def reportBestIndividual(self, population: Population, generationNr: int):
-        sortedIndividuals = sorted(
+        bestIndividual = sorted(
             population.population, key=lambda x: x._adaptation, reverse=True
-        )
-        self.best.insert(generationNr, sortedIndividuals[0].getAdaptation())
+        )[0]
+        bestAdaptation = float("{:.2f}".format(bestIndividual.getAdaptation()))
+        self.best.insert(generationNr, bestAdaptation)
         print(
             "Best individual: \n- genome: {} \n- value {} \n- adaptation: {} ".format(
-                sortedIndividuals[0].genotype.toString(),
-                sortedIndividuals[0].getValue(),
-                sortedIndividuals[0].getAdaptation(),
+                bestIndividual.genotype.toString(),
+                bestIndividual.getValue(),
+                bestAdaptation,
             )
         )  # tmp without indiv object
         TerrainHandler.drawTerrainWithPoints(
-            sortedIndividuals[0].getFenotype(), generationNr
+            bestIndividual.getFenotype(), generationNr
         )
 
     def reportAllIndividuals(self, population: Population):
@@ -48,6 +49,7 @@ class Reporter:
         adaptationAvg = np.average(
             list(map(lambda indiv: indiv.getAdaptation(), population.population))
         )
+        adaptationAvg = float("{:.2f}".format(adaptationAvg))
         self.avg.insert(generationNr, adaptationAvg)
         print(
             "Population average: adaptation: {} ".format(adaptationAvg)

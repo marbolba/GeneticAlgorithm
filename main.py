@@ -5,6 +5,8 @@ from problem.x2Problem import X2Problem
 from settings.terrainSettings import TerrainSetting
 from problem.terrainProblemPolar import TerrainProblemPolar
 from settings.terrainSettingsPolar import TerrainSettingPolar
+from problem.terrainProblemPolarSel import TerrainProblemPolarSel
+from settings.terrainSettingsPolarSel import TerrainSettingPolarSel
 from settings.terrainSettingsSel import TerrainSettingSel
 from settings.x2Setting import X2Setting
 from tools.terrainHandler import TerrainHandler
@@ -41,6 +43,15 @@ def runForTerrainPolar():
     ga = Ga()
     ga.setSetting(TerrainSettingPolar())
     ga.setProblem(TerrainProblemPolar())
+    ga.initPopulation()
+
+    ga.startAlgorithm()
+
+
+def runForTerrainPolarSel():
+    ga = Ga()
+    ga.setSetting(TerrainSettingPolarSel())
+    ga.setProblem(TerrainProblemPolarSel())
     ga.initPopulation()
 
     ga.startAlgorithm()
