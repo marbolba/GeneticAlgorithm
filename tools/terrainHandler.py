@@ -151,7 +151,10 @@ class TerrainHandler:
         cbar.set_label("Z", rotation=270)
 
         # route
-        items = np.transpose([list(item) for item in points])
+        pointsLoc = points.copy()
+        pointsLoc.insert(0,tuple(TerrainHandler.getWaypoints()[0]))
+
+        items = np.transpose([list(item) for item in pointsLoc])
         plt.plot(items[0], items[1], "r-")
         plt.title("Trasa")
         plt.xlabel("X")
@@ -178,7 +181,10 @@ class TerrainHandler:
         cbar.set_label("Z", rotation=270)
 
         # route
-        items = np.transpose([list(item) for item in bestFenotype])
+        pointsLoc = bestFenotype.copy()
+        pointsLoc.insert(0,tuple(TerrainHandler.getWaypoints()[0]))
+
+        items = np.transpose([list(item) for item in pointsLoc])
         plt.plot(items[0], items[1], "r-")
         plt.title("Trasa")
         plt.xlabel("X")

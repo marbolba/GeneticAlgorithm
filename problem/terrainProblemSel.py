@@ -23,19 +23,20 @@ class TerrainProblemSel(Problem):
         costMax = 10000
 
         # sprawdzenie czy sa punkty do przejscia
-        if len(values) < 1:
+        valuesLoc = values.copy()
+        if len(valuesLoc) < 1:
             return 0
 
         # składowa dystansu - ostatni element do endpoint
         distanceElement = TerrainHandler.distance(
-            (values[len(values) - 1][0], values[len(values) - 1][1]), endPoint
+            (valuesLoc[len(valuesLoc) - 1][0], valuesLoc[len(valuesLoc) - 1][1]), endPoint
         )
 
         # skladowa kosztu podróży
         cost = 0
-        values.insert(0, startPoint)
-        for i in range(0, len(values) - 1):
-            cost = cost + TerrainHandler.travelCost(values[i], values[i + 1])
+        valuesLoc.insert(0, startPoint)
+        for i in range(0, len(valuesLoc) - 1):
+            cost = cost + TerrainHandler.travelCost(valuesLoc[i], valuesLoc[i + 1])
 
         adaptationVal = 5000 * (
             distanceMax - distanceElement
