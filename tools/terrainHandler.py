@@ -184,6 +184,20 @@ class TerrainHandler:
         plt.xlabel("X")
         plt.ylabel("Y")
 
+        # start/end point
+        plt.plot(
+            TerrainHandler.getWaypoints()[0][0],
+            TerrainHandler.getWaypoints()[0][1],
+            "o",
+            color="green",
+        )
+        plt.plot(
+            TerrainHandler.getWaypoints()[1][0],
+            TerrainHandler.getWaypoints()[1][1],
+            "o",
+            color="red",
+        )
+
         # best
         plt.subplot(gs[0, 3])
         plt.plot(range(0, len(best)), best)
