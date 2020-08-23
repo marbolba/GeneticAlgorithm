@@ -79,8 +79,8 @@ class Reporter:
             )
             text_file.write("Avg history: {} \n".format(self.avg))
             text_file.write("Best history: {} \n".format(self.best))
-            text_file.write("Convergence online: {} \n".format(self.online))
-            text_file.write("Convergence offline: {} \n".format(self.offline))
+            text_file.write("Convergence online: {:.2f} \n".format(self.online))
+            text_file.write("Convergence offline: {:.2f} \n".format(self.offline))
 
     def reportOutputPath(self, bestIndividual: Individual):
         bestFenotype = bestIndividual.getFenotype()
