@@ -6,12 +6,12 @@ import matplotlib.pyplot as plt
 from scipy.spatial import distance
 
 
-class TerrainProblemPolar(Problem):
+class TerrainProblemPolarSel(Problem):
     def fenotypeFunction(self, values):
         points = []
         currentPosition = TerrainHandler.getWaypoints()[0]
 
-        for i in range(0, len(values), 2):
+        for i in range(1, round(values[0]) * 2 + 1, 2):
             fi = values[i]
             r = values[i + 1]
             currentPosition = TerrainHandler.getNextStepPosition(currentPosition, fi, r)

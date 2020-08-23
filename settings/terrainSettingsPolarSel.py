@@ -19,24 +19,25 @@ class TerrainGenotypeInfo(GenotypeInfo):
         self.mutation = DecimalOperation.mutation
 
         # terrain step
-        self.stepsNr = 4
+        self.maxStepsNr = 10
 
-        self.parameters = 2*self.stepsNr 
+        self.parameters = 2*self.maxStepsNr + 1
         self.parametersWordLength = list(1 for i in range(0, self.parameters))
-        self.parametersDomain = self.domainsForPolar()
+        self.parametersDomain = self.domainsForPolarSel()
 
-    def domainsForPolar(self):
+    def domainsForPolarSel(self):
         # settings
         maxStepLength = 100
 
         domain = []
-        for _ in range(0, self.stepsNr):
+        domain.append((0, self.maxStepsNr))
+        for _ in range(0, self.maxStepsNr):
             domain.append((0, 2 * np.pi))
             domain.append((0, maxStepLength))
         return domain
 
 
-class TerrainSettingPolar(Setting):
+class TerrainSettingPolarSel(Setting):
     def __init__(self):
         self.terrainGenotypeInfo: TerrainGenotypeInfo = TerrainGenotypeInfo()
 
