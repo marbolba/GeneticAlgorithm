@@ -24,7 +24,7 @@ class TerrainProblemPolarSel(Problem):
         startPoint = TerrainHandler.getWaypoints()[0]
         endPoint = TerrainHandler.getWaypoints()[1]
 
-        distanceMax = TerrainHandler.distance(startPoint, endPoint)
+        distanceMax = TerrainHandler.distance((0,0),TerrainHandler.getSize())
         costMax = 10000
 
         valuesLoc = values.copy()
