@@ -57,7 +57,7 @@ class TerrainHandler:
 
     @staticmethod
     def travelCost(point1, point2):
-        oneUpCost = 30  # cost of traveling one point height
+        oneUpCost = 100  # cost of traveling one point height
 
         size = TerrainHandler.getSize()
         fi = math.atan2(point2[1] - point1[1], point2[0] - point1[0])
