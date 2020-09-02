@@ -9,7 +9,7 @@ import matplotlib.gridspec as gridspec
 
 class TerrainHandler:
     folderPath = ""
-    resultId = "results{}/".format(datetime.now().strftime("%d-%b-%Y_%H%M%S"))
+    resultId = "results{}/".format(datetime.now().strftime("%d-%b-%Y_%H%M%S_%f"))
     terrain = []
     accessibility = []
     waypoints = []
@@ -41,7 +41,7 @@ class TerrainHandler:
 
     @staticmethod
     def getWaypoints():
-        return TerrainHandler.waypoints[0],TerrainHandler.waypoints[1]
+        return TerrainHandler.waypoints[0], TerrainHandler.waypoints[1]
 
     @staticmethod
     def getPointHeight(x, y):
@@ -152,7 +152,7 @@ class TerrainHandler:
 
         # route
         pointsLoc = points.copy()
-        pointsLoc.insert(0,tuple(TerrainHandler.getWaypoints()[0]))
+        pointsLoc.insert(0, tuple(TerrainHandler.getWaypoints()[0]))
 
         items = np.transpose([list(item) for item in pointsLoc])
         plt.plot(items[0], items[1], "r-")
@@ -182,7 +182,7 @@ class TerrainHandler:
 
         # route
         pointsLoc = bestFenotype.copy()
-        pointsLoc.insert(0,tuple(TerrainHandler.getWaypoints()[0]))
+        pointsLoc.insert(0, tuple(TerrainHandler.getWaypoints()[0]))
 
         items = np.transpose([list(item) for item in pointsLoc])
         plt.plot(items[0], items[1], "r-")
@@ -223,4 +223,5 @@ class TerrainHandler:
             top=0.95, bottom=0.07, left=0.05, right=0.95, hspace=0.27, wspace=0.05
         )
         plt.savefig("{}result-2d.png".format(historyFolder))
-        plt.show()
+        plt.close()
+        # plt.show()

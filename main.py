@@ -58,5 +58,5 @@ def runForTerrainPolarSel():
 
 
 if __name__ == "__main__":
-    TerrainHandler.setName("case2new")
+    TerrainHandler.setName("case2new2")
     runForTerrain()

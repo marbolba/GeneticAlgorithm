@@ -60,12 +60,14 @@ class Reporter:
             population.population, key=lambda x: x._adaptation, reverse=True
         )
         bestIndividual = sortedIndividuals[0]
-        
+
         # calculate quality
         # distance
-        best_individual_end_point = bestIndividual.getFenotype()[len(bestIndividual.getFenotype())-1]
+        best_individual_end_point = bestIndividual.getFenotype()[
+            len(bestIndividual.getFenotype()) - 1
+        ]
         end_point = TerrainHandler.getWaypoints()[1]
-        distance_to_goal = TerrainHandler.distance(best_individual_end_point,end_point)
+        distance_to_goal = TerrainHandler.distance(best_individual_end_point, end_point)
         # cost
         cost = 0
         valuesLoc = bestIndividual.getFenotype().copy()
@@ -75,7 +77,7 @@ class Reporter:
         distance_to_goal = float("{:.2f}".format(distance_to_goal))
         cost = float("{:.2f}".format(cost))
 
-        #report to files
+        # report to files
         self.reportOutputPath(bestIndividual)
         self.saveToFile("avg", self.avg)
         self.saveToFile("best", self.best)
@@ -83,7 +85,7 @@ class Reporter:
         self.saveToFile("offline", self.offline)
         self.saveToFile("distance_to_goal", distance_to_goal)
         self.saveToFile("cost_of_travel", cost)
-        
+
         # readable report
         historyFolder = f"{TerrainHandler.getName()}{TerrainHandler.getResultId()}"
         with open(f"{historyFolder}result.txt", "w") as text_file:
@@ -100,8 +102,16 @@ class Reporter:
             text_file.write("Best history: {} \n".format(self.best))
             text_file.write("Distance to goal: {}\n".format(distance_to_goal))
             text_file.write("Cost of travel: {}\n".format(cost))
-            text_file.write("Convergence online: {:.2f} \n".format(self.online[len(self.online)-1]))
-            text_file.write("Convergence offline: {:.2f} \n".format(self.offline[len(self.offline)-1]))
+            text_file.write(
+                "Convergence online: {:.2f} \n".format(
+                    self.online[len(self.online) - 1]
+                )
+            )
+            text_file.write(
+                "Convergence offline: {:.2f} \n".format(
+                    self.offline[len(self.offline) - 1]
+                )
+            )
 
     def reportOutputPath(self, bestIndividual: Individual):
         bestFenotype = bestIndividual.getFenotype()
@@ -110,7 +120,7 @@ class Reporter:
     def reportConvergence(self):
         self.online.append(float("{:.2f}".format(np.mean(self.avg))))
         self.offline.append(float("{:.2f}".format(np.mean(self.best))))
-        
+
     def saveToFile(self, name, value):
         historyFolder = f"{TerrainHandler.getName()}{TerrainHandler.getResultId()}"
         self.checkIfFolderExists(historyFolder)

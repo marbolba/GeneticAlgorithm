@@ -28,17 +28,17 @@ class DecimalOperation(Operation):
                 return
 
             if np.random.rand() <= setting.crossoverProbability():
-                tmpGenotype1 = population[i].genotype.genotype  
-                tmpGenotype2 = population[i + 1].genotype.genotype  
+                tmpGenotype1 = population[i].genotype.genotype
+                tmpGenotype2 = population[i + 1].genotype.genotype
                 # randomly select cut point
                 cutPoint = np.random.randint(1, genotypeLength)
                 # print('cx:', population[i].genotype.genotype, '&', population[i + 1].genotype.genotype, 'in', cutPoint)
                 for j in range(cutPoint, genotypeLength):
                     tmpGenotype1[j], tmpGenotype2[j] = tmpGenotype2[j], tmpGenotype1[j]
-                population[i].setGenotype(tmpGenotype1)  
-                population[i + 1].setGenotype(tmpGenotype2)  
+                population[i].setGenotype(tmpGenotype1)
+                population[i + 1].setGenotype(tmpGenotype2)
                 # print('ax:', population[i].genotype.genotype, '&', population[i + 1].genotype.genotype, 'in', cutPoint)
-                
+
     @staticmethod
     def doublePointCrossover(population: [Individual], setting: Setting):
         sizeOfPopulation = len(population)
@@ -51,8 +51,8 @@ class DecimalOperation(Operation):
                 )
 
             if np.random.rand() <= setting.crossoverProbability():
-                tmpGenotype1 = population[i].genotype.genotype  
-                tmpGenotype2 = population[i + 1].genotype.genotype  
+                tmpGenotype1 = population[i].genotype.genotype
+                tmpGenotype2 = population[i + 1].genotype.genotype
                 # randomly select cut point
                 cutPoint1 = np.random.randint(1, genotypeLength)
                 cutPoint2 = np.random.randint(1, genotypeLength)
@@ -61,8 +61,8 @@ class DecimalOperation(Operation):
                     tmpGenotype1[j], tmpGenotype2[j] = tmpGenotype2[j], tmpGenotype1[j]
                 for j in range(cutPoint2, genotypeLength):
                     tmpGenotype1[j], tmpGenotype2[j] = tmpGenotype2[j], tmpGenotype1[j]
-                population[i].setGenotype(tmpGenotype1)  
-                population[i + 1].setGenotype(tmpGenotype2)  
+                population[i].setGenotype(tmpGenotype1)
+                population[i + 1].setGenotype(tmpGenotype2)
                 # print('ax:', population[i].genotype.genotype, '&', population[i + 1].genotype.genotype, 'in', cutPoint1, '&', cutPoint2)
 
     # MUTATION

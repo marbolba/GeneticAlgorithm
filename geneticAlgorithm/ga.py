@@ -31,8 +31,8 @@ class Ga:
             # stats
             self.reporter.reportPopulationAverage(self.population, generationId)
             self.reporter.reportBestIndividual(self.population, generationId)
+            self.reporter.reportConvergence()
 
-        self.reporter.reportConvergence()
         self.reporter.reportResults(self.population)
 
     def initPopulation(self):

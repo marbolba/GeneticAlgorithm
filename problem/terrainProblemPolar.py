@@ -19,18 +19,18 @@ class TerrainProblemPolar(Problem):
         return points
 
     def adaptationFunction(self, values: []):
-    # settings
+        # settings
         # costFunction: always between <0,1>
         # costFunction = lambda x: x # linear
         # costFunction = lambda x: (1/16)*pow(16,x) # exponential (0.75,0.5)
-        costFunction = lambda x: (1/64)*pow(64,x) # exponential (0.83,0.5)
+        costFunction = lambda x: (1 / 64) * pow(64, x)  # exponential (0.83,0.5)
         # factor / ratio:
         sum = 1000
-        W = 5/3
+        W = 5 / 3
         b = sum / (W + 1)
         a = sum - b
 
-    # the rest
+        # the rest
 
         startPoint = TerrainHandler.getWaypoints()[0]
         endPoint = TerrainHandler.getWaypoints()[1]
@@ -43,11 +43,8 @@ class TerrainProblemPolar(Problem):
         if len(valuesLoc) < 1:
             return 0
 
-        # calculate distance 
-        distance = TerrainHandler.distance(
-            valuesLoc[len(valuesLoc) - 1],
-            endPoint,
-        )
+        # calculate distance
+        distance = TerrainHandler.distance(valuesLoc[len(valuesLoc) - 1], endPoint,)
 
         # calculate cost
         cost = 0
