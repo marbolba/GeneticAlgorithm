@@ -21,7 +21,7 @@ class TerrainGenotypeInfo(GenotypeInfo):
         # terrain step
         self.stepsNr = 4
 
-        self.parameters = 2*self.stepsNr 
+        self.parameters = 2 * self.stepsNr
         self.parametersWordLength = list(1 for i in range(0, self.parameters))
         self.parametersDomain = self.domainsForPolar()
 

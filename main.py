@@ -58,5 +58,5 @@ def runForTerrainPolarSel():
 
 
 if __name__ == "__main__":
-    TerrainHandler.setName("21-cze-2020_004739")
-    runForTerrainPolar()
+    TerrainHandler.setName("case2new")
+    runForTerrain()

@@ -19,7 +19,7 @@ class TerrainProblemSel(Problem):
         startPoint = TerrainHandler.getWaypoints()[0]
         endPoint = TerrainHandler.getWaypoints()[1]
 
-        distanceMax = TerrainHandler.distance((0,0),TerrainHandler.getSize())
+        distanceMax = TerrainHandler.distance((0, 0), TerrainHandler.getSize())
         costMax = 10000
 
         # sprawdzenie czy sa punkty do przejscia
@@ -29,7 +29,8 @@ class TerrainProblemSel(Problem):
 
         # składowa dystansu - ostatni element do endpoint
         distanceElement = TerrainHandler.distance(
-            (valuesLoc[len(valuesLoc) - 1][0], valuesLoc[len(valuesLoc) - 1][1]), endPoint
+            (valuesLoc[len(valuesLoc) - 1][0], valuesLoc[len(valuesLoc) - 1][1]),
+            endPoint,
         )
 
         # skladowa kosztu podróży
