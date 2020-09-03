@@ -50,6 +50,36 @@ class Operation:
         return newPopulation
 
     @staticmethod
+    def rankReproduction(population: Population):
+        sortedPopulation = sorted(
+            population.population, key=lambda x: x._adaptation, reverse=True
+        )
+        N = len(population.population)
+
+
+        sum = np.sum(range(0,N))
+        k = N/(N*N-sum)
+        a = 1/N - k*(1 - sum/(N*N))
+
+        selectChance = []
+        for r in range(N):
+            selectChance.append(a + k*(1- (r/N)))
+        assert(np.sum(selectChance),1.0)
+        selectChance = np.cumsum(selectChance)
+        
+        # select new population
+        newPopulation = []
+        selected = np.random.rand(N)
+        for sel in selected:
+            for propIdx in range(len(selectChance)):
+                if sel <= selectChance[propIdx]:
+                    newPopulation.append(copy.deepcopy(population.population[propIdx]))
+                    break
+
+        # override with new population
+        return newPopulation
+
+    @staticmethod
     def singlePointCrossover(population: [Individual], setting: Setting):
         raise NotImplementedError("The method not implemented")
 
