@@ -13,7 +13,7 @@ class TerrainGenotypeInfo(GenotypeInfo):
 
         self.type = DecimalGenotype
 
-        self.reproduction = DecimalOperation.tournamentReproduction
+        self.reproduction = DecimalOperation.rankReproduction
         self.succession = DecimalOperation.eliteSuccession
         self.crossover = DecimalOperation.singlePointCrossover
         self.mutation = DecimalOperation.mutation

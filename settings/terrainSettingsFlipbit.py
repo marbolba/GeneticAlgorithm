@@ -26,7 +26,7 @@ class TerrainGenotypeInfo(GenotypeInfo):
 
     def domainsForFlipbit(self):
         domain = []
-        for i in range(0, self.parameters,3):
+        for i in range(0, self.parameters, 3):
             domain.append((0, TerrainHandler.getSize()[0] - 1))
             domain.append((0, TerrainHandler.getSize()[1] - 1))
             domain.append((0, 100))

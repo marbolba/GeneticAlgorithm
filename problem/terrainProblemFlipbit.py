@@ -10,7 +10,7 @@ class TerrainProblemFlipbit(Problem):
     def fenotypeFunction(self, values):
         points = []
         for i in range(0, len(values), 3):
-            if(values[i+2]>=50):
+            if values[i + 2] >= 50:
                 points.append([values[i], values[i + 1]])
         return points
 

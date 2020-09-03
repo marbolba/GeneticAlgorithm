@@ -8,19 +8,19 @@ from settings.abstractSettings import Setting
 class Individual:
     def __init__(self):
         self.genotype: Genotype = None
-        self._problem: Problem = None
-        self._setting: Setting = None
+        self.problem: Problem = None
+        self.setting: Setting = None
 
         self._values = None
         self._fenotype = None
         self._adaptation = None
 
     def setProblem(self, problem: Problem):
-        self._problem = problem
+        self.problem = problem
         self._initGenotype()
 
     def setSetting(self, setting: Setting):
-        self._setting = setting
+        self.setting = setting
 
     def setGenotype(self, genotype: []):
         self.genotype.genotype = genotype
@@ -40,8 +40,8 @@ class Individual:
         self._calculateAdaptation()
 
     def _initGenotype(self):
-        g = self._setting.genotypeInfo().type()
-        g.setGenotypeInfo(self._setting.genotypeInfo())
+        g = self.setting.genotypeInfo().type()
+        g.setGenotypeInfo(self.setting.genotypeInfo())
         g.randomize()
         self.genotype = g
 
@@ -51,11 +51,11 @@ class Individual:
 
     # calculates fenotype value
     def _calculateFenotype(self):
-        self._fenotype = self._problem.fenotypeFunction(self._values)
+        self._fenotype = self.problem.fenotypeFunction(self._values)
 
     # sets adaptation function value for individual
     def _calculateAdaptation(self):
-        self._adaptation = self._problem.adaptationFunction(self._fenotype)
+        self._adaptation = self.problem.adaptationFunction(self._fenotype)
 
     def getValue(self):
         return self._values

@@ -56,24 +56,23 @@ class Operation:
         )
         N = len(population.population)
 
-
-        sum = np.sum(range(0,N))
-        k = N/(N*N-sum)
-        a = 1/N - k*(1 - sum/(N*N))
+        sum = np.sum(range(0, N))
+        k = N / (N * N - sum)
+        a = 1 / N - k * (1 - sum / (N * N))
 
         selectChance = []
         for r in range(N):
-            selectChance.append(a + k*(1- (r/N)))
-        assert(np.sum(selectChance),1.0)
+            selectChance.append(a + k * (1 - (r / N)))
+        assert np.sum(selectChance) == 1.0
         selectChance = np.cumsum(selectChance)
-        
+
         # select new population
         newPopulation = []
         selected = np.random.rand(N)
         for sel in selected:
             for propIdx in range(len(selectChance)):
                 if sel <= selectChance[propIdx]:
-                    newPopulation.append(copy.deepcopy(population.population[propIdx]))
+                    newPopulation.append(copy.deepcopy(sortedPopulation[propIdx]))
                     break
 
         # override with new population
@@ -91,6 +90,25 @@ class Operation:
     @staticmethod
     def trivialSuccession(population: Population, newPopulation: [Individual]):
         population.setPopulation(newPopulation)
+
+    # SUCCESSION
+    @staticmethod
+    def freshBloodSuccession(population: Population, newPopulation: [Individual]):
+        # settings parameters:
+        g = 0.05  # percent of fresh blood individuals
+        finalPopulationSize = len(population.population)
+        sortedNewPopulation = sorted(
+            newPopulation, key=lambda x: x._adaptation, reverse=True
+        )
+
+        for i in range(0, int(g * finalPopulationSize)):
+            newIndividual = Individual()
+            newIndividual.setSetting(population.population[0].setting)
+            newIndividual.setProblem(population.population[0].problem)
+            sortedNewPopulation[finalPopulationSize - 1 - i] = newIndividual
+
+        random.shuffle(sortedNewPopulation)
+        population.setPopulation(sortedNewPopulation)
 
     @staticmethod
     def eliteSuccession(population: Population, newPopulation: [Individual]):
