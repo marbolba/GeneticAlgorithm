@@ -42,16 +42,16 @@ class TerrainSettingPolarSel(Setting):
         self.terrainGenotypeInfo: TerrainGenotypeInfo = TerrainGenotypeInfo()
 
     def generationsNumber(self):
-        return 50
+        return 30
 
     def populationSize(self):
         return 100
 
     def mutationProbability(self):
-        return 0.1
+        return 0.01
 
     def crossoverProbability(self):
-        return 0.5
+        return 1
 
     def genotypeInfo(self):
         return self.terrainGenotypeInfo

@@ -22,7 +22,7 @@ class TerrainProblemFlipbit(Problem):
         costFunction = lambda x: (1 / 64) * pow(64, x)  # exponential (0.83,0.5)
         # factor / ratio:
         sum = 1000
-        W = 1
+        W = 5 / 3
         b = sum / (W + 1)
         a = sum - b
 
