@@ -31,7 +31,7 @@ class DecimalOperation(Operation):
                 tmpGenotype1 = population[i].genotype.genotype
                 tmpGenotype2 = population[i + 1].genotype.genotype
                 # randomly select cut point
-                cutPoint = np.random.randint(1, genotypeLength)
+                cutPoint = np.random.randint(0, genotypeLength)
                 # print('cx:', population[i].genotype.genotype, '&', population[i + 1].genotype.genotype, 'in', cutPoint)
                 for j in range(cutPoint, genotypeLength):
                     tmpGenotype1[j], tmpGenotype2[j] = tmpGenotype2[j], tmpGenotype1[j]
@@ -54,8 +54,8 @@ class DecimalOperation(Operation):
                 tmpGenotype1 = population[i].genotype.genotype
                 tmpGenotype2 = population[i + 1].genotype.genotype
                 # randomly select cut point
-                cutPoint1 = np.random.randint(1, genotypeLength)
-                cutPoint2 = np.random.randint(1, genotypeLength)
+                cutPoint1 = np.random.randint(0, genotypeLength)
+                cutPoint2 = np.random.randint(0, genotypeLength)
                 # print('cx:', population[i].genotype.genotype, '&', population[i + 1].genotype.genotype, 'in', cutPoint1, '&', cutPoint2)
                 for j in range(cutPoint1, genotypeLength):
                     tmpGenotype1[j], tmpGenotype2[j] = tmpGenotype2[j], tmpGenotype1[j]
@@ -78,7 +78,7 @@ class DecimalOperation(Operation):
             for geneIdx in mutateGeneIndicles:
                 # print("MUT 1/2",genotype[geneIdx])
                 mu = genotype[geneIdx]
-                sigma = 10
+                sigma = 50
                 while True:  # do while loop emulation
                     x = float("{:.2f}".format(normalvariate(mu, sigma)))
                     # check if is in bounds
