@@ -42,7 +42,7 @@ class Operation:
         for _ in range(k):
             aspirants = Operation.rouletteReproduction(population, k=tournamentSize)
             sortedIndividuals = sorted(
-                aspirants, key=lambda x: x._adaptation, reverse=True
+                aspirants, key=lambda x: x.getAdaptation(), reverse=True
             )
             newPopulation.append(copy.deepcopy(sortedIndividuals[0]))
 
@@ -52,7 +52,7 @@ class Operation:
     @staticmethod
     def rankReproduction(population: Population):
         sortedPopulation = sorted(
-            population.population, key=lambda x: x._adaptation, reverse=True
+            population.population, key=lambda x: x.getAdaptation(), reverse=True
         )
         N = len(population.population)
 
@@ -98,7 +98,7 @@ class Operation:
         g = 0.05  # percent of fresh blood individuals
         finalPopulationSize = len(population.population)
         sortedNewPopulation = sorted(
-            newPopulation, key=lambda x: x._adaptation, reverse=True
+            newPopulation, key=lambda x: x.getAdaptation(), reverse=True
         )
 
         for i in range(0, int(g * finalPopulationSize)):
@@ -115,15 +115,14 @@ class Operation:
         # settings parameters:
         g = 0.3  # percent of old population elite
         sortedOldPopulation = sorted(
-            population.population, key=lambda x: x._adaptation, reverse=True
+            population.population, key=lambda x: x.getAdaptation(), reverse=True
         )
         sortedNewPopulation = sorted(
-            newPopulation, key=lambda x: x._adaptation, reverse=True
+            newPopulation, key=lambda x: x.getAdaptation(), reverse=True
         )
         finalPopulationSize = len(sortedOldPopulation)
 
         for i in range(0, int(g * finalPopulationSize)):
-            # print(sortedNewPopulation[finalPopulationSize-1-i]._adaptation,"for", sortedOldPopulation[i]._adaptation)
             sortedNewPopulation[finalPopulationSize - 1 - i] = sortedOldPopulation[
                 i
             ]  # exchange worst new for best old

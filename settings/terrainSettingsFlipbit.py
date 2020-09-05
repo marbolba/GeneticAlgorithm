@@ -19,7 +19,7 @@ class TerrainGenotypeInfo(GenotypeInfo):
         self.mutation = DecimalOperation.mutation
 
         # terrain basic
-        maxStepsNr = 8
+        maxStepsNr = 10
         self.parameters = 3 * maxStepsNr
         self.parametersWordLength = list(1 for i in range(0, self.parameters))
         self.parametersDomain = self.domainsForFlipbit()

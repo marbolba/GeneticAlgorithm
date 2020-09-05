@@ -17,7 +17,7 @@ class Reporter:
 
     def reportBestIndividual(self, population: Population, generationNr: int):
         bestIndividual = sorted(
-            population.population, key=lambda x: x._adaptation, reverse=True
+            population.population, key=lambda x: x.getAdaptation(), reverse=True
         )[0]
         bestAdaptation = float("{:.2f}".format(bestIndividual.getAdaptation()))
         self.best.insert(generationNr, bestAdaptation)
@@ -57,7 +57,7 @@ class Reporter:
 
     def reportResults(self, population: Population):
         sortedIndividuals = sorted(
-            population.population, key=lambda x: x._adaptation, reverse=True
+            population.population, key=lambda x: x.getAdaptation(), reverse=True
         )
         bestIndividual = sortedIndividuals[0]
 
