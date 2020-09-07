@@ -6,11 +6,16 @@ import matplotlib.pyplot as plt
 from scipy.spatial import distance
 
 
-class TerrainProblem(Problem):
+class TerrainProblemPolarFlipbit(Problem):
     def fenotypeFunction(self, values):
         points = []
-        for i in range(0, len(values), 2):
-            points.append([values[i], values[i + 1]])
+        currentPosition = TerrainHandler.getWaypoints()[0]
+        for i in range(0, len(values), 3):
+            if values[i + 2] >= 50:
+                fi = values[i]
+                r = values[i + 1]
+                currentPosition = TerrainHandler.getNextStepPosition(currentPosition, fi, r)
+                points.append(currentPosition)
         return points
 
     def adaptationFunction(self, values: []):

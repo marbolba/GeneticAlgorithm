@@ -6,11 +6,12 @@ import matplotlib.pyplot as plt
 from scipy.spatial import distance
 
 
-class TerrainProblem(Problem):
+class TerrainProblemBoxSel(Problem):
     def fenotypeFunction(self, values):
         points = []
-        for i in range(0, len(values), 2):
-            points.append([values[i], values[i + 1]])
+        for i in range(0, len(values), 3):
+            if values[i + 2] >= 20:
+                points.append([values[i], values[i + 1]])
         return points
 
     def adaptationFunction(self, values: []):
@@ -45,7 +46,15 @@ class TerrainProblem(Problem):
         cost = 0
         valuesLoc.insert(0, startPoint)
         for i in range(0, len(valuesLoc) - 1):
-            cost = cost + TerrainHandler.travelCost(valuesLoc[i], valuesLoc[i + 1])
+            if TerrainHandler.distance(valuesLoc[i], valuesLoc[i + 1]) <= 150:
+                cost = cost + TerrainHandler.travelCost(valuesLoc[i], valuesLoc[i + 1])
+            else:
+                # punish
+                cost = (
+                    cost + TerrainHandler.travelCost(valuesLoc[i], valuesLoc[i + 1]) +300
+                )
+
+        # print(cost)
 
         distance_element = (distanceMax - distance) / distanceMax
         cost_element = (costMax - cost) / costMax

@@ -11,6 +11,10 @@ from problem.terrainProblemPolarSel import TerrainProblemPolarSel
 from settings.terrainSettingsPolarSel import TerrainSettingPolarSel
 from problem.terrainProblemFlipbit import TerrainProblemFlipbit
 from settings.terrainSettingsFlipbit import TerrainSettingFlipbit
+from problem.terrainProblemBoxSel import TerrainProblemBoxSel
+from settings.terrainSettingsBoxSel import TerrainSettingBoxSel
+from problem.terrainProblemPolarFlipbit import TerrainProblemPolarFlipbit
+from settings.terrainSettingsPolarFlipbit import TerrainSettingPolarFlipbit
 from tools.terrainHandler import TerrainHandler
 
 
@@ -41,6 +45,15 @@ def runForTerrainSel():
     ga.startAlgorithm()
 
 
+def runForTerrainFlipbit():
+    ga = Ga()
+    ga.setSetting(TerrainSettingFlipbit())
+    ga.setProblem(TerrainProblemFlipbit())
+    ga.initPopulation()
+
+    ga.startAlgorithm()
+
+
 def runForTerrainPolar():
     ga = Ga()
     ga.setSetting(TerrainSettingPolar())
@@ -59,15 +72,31 @@ def runForTerrainPolarSel():
     ga.startAlgorithm()
 
 
-def runForTerrainFlipbit():
+def runForTerrainPolarFlipbit():
     ga = Ga()
-    ga.setSetting(TerrainSettingFlipbit())
-    ga.setProblem(TerrainProblemFlipbit())
+    ga.setSetting(TerrainSettingPolarFlipbit())
+    ga.setProblem(TerrainProblemPolarFlipbit())
+    ga.initPopulation()
+
+    ga.startAlgorithm()
+
+
+def runForTerrainBoxSel():
+    ga = Ga()
+    ga.setSetting(TerrainSettingBoxSel())
+    ga.setProblem(TerrainProblemBoxSel())
     ga.initPopulation()
 
     ga.startAlgorithm()
 
 
 if __name__ == "__main__":
-    TerrainHandler.setName("case2new2")
-    runForTerrainFlipbit()
+    TerrainHandler.setName("case2rounded")
+    # runForTerrain()               # ch1
+    # runForTerrainSel()            # ch2
+    runForTerrainFlipbit()        # ch3
+    # runForTerrainPolar()          # ch4
+    # runForTerrainPolarSel()       # ch5
+    # runForTerrainPolarFlipbit()   # ch6
+
+    # runForTerrainFlipbit()     
